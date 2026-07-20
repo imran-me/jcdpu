@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University Unit Profile | JCD Private University Wing</title>
+  <meta name="description" content="University committee unit profile — members, achievements, events, performance graph, notice board and activity timeline." />
+  <link rel="icon" href="../assets/img/logo-jcd.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/theme.css" />
+  <link rel="stylesheet" href="../assets/css/pages.css" />
+  <link rel="stylesheet" href="../assets/css/luxury.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<div class="topbar"><div class="container">
+  <div class="topbar__left">
+    <span><i data-lucide="shield-check"></i> Bangladesh Nationalist Party — Student Wing</span>
+    <span><i data-lucide="phone"></i> +880 2-555 0179</span>
+    <span><i data-lucide="mail"></i> puwing@chhatradal.org</span>
+  </div>
+  <div class="topbar__right">
+    <span class="d-none d-md-inline">সবার আগে বাংলাদেশ · Bangladesh First</span>
+    <button class="lang-toggle" id="langToggle" type="button" aria-label="Toggle language">বাংলা / EN</button>
+  </div>
+</div></div>
+
+<header class="nav" id="nav"><div class="container nav__inner">
+  <a class="brand" href="../index.html" aria-label="Home">
+    <img class="brand__logo" src="../assets/img/logo-jcd.png" alt="Jatiyatabadi Chhatra Dal emblem" />
+    <span class="brand__text"><span class="brand__title">জাতীয়তাবাদী ছাত্রদল</span><span class="brand__sub">Private University Wing</span></span>
+  </a>
+  <nav aria-label="Primary"><ul class="nav__menu">
+    <li><a class="nav__link" href="../index.html#about">About</a></li>
+    <li><a class="nav__link" href="../index.html#structure">Organisation</a></li>
+    <li><a class="nav__link" href="leadership.html">Leadership</a></li>
+    <li><a class="nav__link" href="../index.html#history">History</a></li>
+    <li><a class="nav__link" href="universities.html">Universities</a></li>
+    <li><a class="nav__link" href="../index.html#notices">Notices</a></li>
+  </ul></nav>
+  <div class="nav__actions">
+    <a class="btn btn--ghost btn--sm" href="login.html"><i data-lucide="log-in"></i> Sign in</a>
+    <a class="btn btn--primary btn--sm" href="member-profile.html"><i data-lucide="user-plus"></i> Member Portal</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu"><i data-lucide="menu"></i></button>
+  </div>
+</div></header>
+
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav__head"><div class="brand"><img class="brand__logo" src="../assets/img/logo-jcd.png" alt="" /><span class="brand__title">ছাত্রদল</span></div>
+  <button class="nav__toggle" id="navClose" aria-label="Close menu"><i data-lucide="x"></i></button></div>
+  <a href="../index.html#about">About</a>
+  <a href="../index.html#structure">Organisation</a>
+  <a href="leadership.html">Leadership</a>
+  <a href="../index.html#history">History</a>
+  <a href="universities.html">Universities</a>
+  <a href="../index.html#notices">Notices</a>
+  <a href="login.html">Sign in</a>
+  <a class="btn btn--primary btn--block" href="member-profile.html" style="margin-top:12px;">Member Portal</a>
+</div>
+
+<main id="main">
+  <div class="profile-cover"><img src="../assets/img/gallery-2.jpg" alt="" /></div>
+  <div class="container">
+    <div class="profile-head">
+      <div class="profile-avatar" id="uniLogo" style="display:grid;place-items:center;font-size:2.4rem;font-weight:800;color:var(--green-800);"></div>
+      <div class="profile-id">
+        <h1 id="uniName">University Unit</h1>
+        <div class="sub" id="uniMeta"></div>
+        <div class="chips" id="uniChips"></div>
+      </div>
+      <div class="profile-actions no-print">
+        <button class="btn btn--ghost btn--sm"><i data-lucide="bell"></i> Follow</button>
+        <a class="btn btn--primary btn--sm" href="member-profile.html"><i data-lucide="user-plus"></i> Join unit</a>
+      </div>
+    </div>
+
+    <div class="profile-grid">
+      <aside>
+        <div class="side-card">
+          <h4>Unit Details</h4>
+          <div class="kv"><span>Status</span><b id="dStatus">Active</b></div>
+          <div class="kv"><span>Established</span><b id="dEst">—</b></div>
+          <div class="kv"><span>Division</span><b id="dDiv">—</b></div>
+          <div class="kv"><span>Members</span><b id="dMem">—</b></div>
+          <div class="kv"><span>Committees</span><b id="dCom">—</b></div>
+          <div class="kv"><span>Grade</span><b id="dGrade">—</b></div>
+        </div>
+        <div class="side-card">
+          <h4>Performance</h4>
+          <div class="score-ring"><div class="ring" id="ring" style="--val:0;"><b id="ringNum">0</b><small>/ 100</small></div></div>
+        </div>
+        <div class="side-card">
+          <h4>Notice Board</h4>
+          <div class="kv"><span>Council delegate list</span><b>Due 5 Aug</b></div>
+          <div class="kv"><span>Monthly report</span><b>Submitted</b></div>
+          <div class="kv"><span>Founding day</span><b>1 Jan</b></div>
+        </div>
+        <div class="side-card">
+          <h4>Contact & Social</h4>
+          <div class="footer__social" style="margin-top:0;">
+            <a href="#" style="background:var(--green-050);color:var(--green-700);"><i data-lucide="facebook"></i></a>
+            <a href="#" style="background:var(--green-050);color:var(--green-700);"><i data-lucide="mail"></i></a>
+            <a href="#" style="background:var(--green-050);color:var(--green-700);"><i data-lucide="phone"></i></a>
+          </div>
+        </div>
+      </aside>
+
+      <div>
+        <div class="pane">
+          <h3><i data-lucide="info"></i> About the unit</h3>
+          <p class="muted" id="uniAbout" style="margin:0;"></p>
+        </div>
+
+        <div class="pane">
+          <h3><i data-lucide="crown"></i> Committee Leadership</h3>
+          <div class="ach-grid">
+            <div class="ach"><div class="ic" style="background:var(--maroon-100,#fbe9ec);color:var(--maroon-700);"><i data-lucide="user"></i></div><div><b>Ashiqur Rahman</b><span>President</span></div></div>
+            <div class="ach"><div class="ic"><i data-lucide="user"></i></div><div><b>Tanvir Hasan</b><span>General Secretary</span></div></div>
+            <div class="ach"><div class="ic"><i data-lucide="user"></i></div><div><b>Rakibul Islam</b><span>Organising Secretary</span></div></div>
+            <div class="ach"><div class="ic"><i data-lucide="user"></i></div><div><b>Sadia Afroz</b><span>Treasurer</span></div></div>
+          </div>
+        </div>
+
+        <div class="pane">
+          <h3><i data-lucide="git-branch"></i> Faculty &amp; Department Committees</h3>
+          <div class="ftree" id="ftree"></div>
+        </div>
+
+        <div class="pane">
+          <h3><i data-lucide="activity"></i> Activity Timeline</h3>
+          <div class="exp">
+            <div class="item"><span class="when">Jul 2026</span><h5>Q3 report submitted & Grade A retained</h5><p>Unit ranked #1 in Dhaka division for activity and leadership.</p></div>
+            <div class="item"><span class="when">Jun 2026</span><h5>Nationalist Youth Convention hosted</h5><p>420 attendees; certificates issued via QR attendance.</p></div>
+            <div class="item"><span class="when">May 2026</span><h5>Membership drive — +120 verified members</h5><p>New department committees formed in EEE and BBA.</p></div>
+          </div>
+        </div>
+
+        <div class="pane">
+          <h3><i data-lucide="images"></i> Gallery</h3>
+          <div class="gallery" style="grid-auto-rows:120px;">
+            <figure class="wide"><img src="../assets/img/gallery-1.jpg" alt="" /></figure>
+            <figure><img src="../assets/img/tarique-manifesto.jpg" alt="" /></figure>
+            <figure><img src="../assets/img/thank-you-bangladesh.jpg" alt="" /></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer"><div class="container"><div class="footer__bar" style="border:none;">
+    <span>© 2026 Jatiyatabadi Chhatra Dal — Private University Wing.</span><span>সবার আগে বাংলাদেশ</span>
+  </div></div></footer>
+</main>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../assets/js/nav.js"></script>
+<script src="../assets/js/ui.js"></script>
+<script src="../assets/js/data.js"></script>
+<script>
+  var universities = window.JCD.universities;
+  const id = new URLSearchParams(location.search).get("u") || "nsu";
+  const u = universities.find(x => x.id === id) || universities[0];
+  const perf = { A: 92, B: 80, C: 68, D: 55 }[u.grade];
+
+  document.getElementById("uniLogo").textContent = u.short.slice(0,2);
+  document.getElementById("uniName").textContent = u.name;
+  document.getElementById("uniMeta").textContent = `${u.short} Unit · ${u.district}, ${u.division} · Est. ${u.established}`;
+  document.getElementById("uniChips").innerHTML =
+    `<span class="badge badge--gold"><i data-lucide="badge-check" style="width:14px;height:14px;"></i> Verified Unit</span>
+     <span class="badge badge--green">${u.status}</span>
+     <span class="badge badge--maroon">Grade ${u.grade}</span>`;
+  document.getElementById("dStatus").textContent = u.status;
+  document.getElementById("dEst").textContent = u.established;
+  document.getElementById("dDiv").textContent = u.division;
+  document.getElementById("dMem").textContent = u.members;
+  document.getElementById("dCom").textContent = u.committees;
+  document.getElementById("dGrade").textContent = u.grade;
+  document.getElementById("uniAbout").textContent =
+    `The ${u.short} University Unit organises ${u.members} verified members across ${u.committees} committees at ${u.name}. Founded to advance nationalist student leadership, the unit maintains an active programme of civic engagement, service and democratic participation under the Private University Wing.`;
+
+  // Faculty & Department committees (representative)
+  const faculties = [
+    { name: "Engineering & Sciences", members: 210, depts: [["Computer Science", 48], ["Electrical & Electronic", 36], ["Civil Engineering", 28], ["Pharmacy", 22]] },
+    { name: "Business Administration", members: 184, depts: [["BBA", 60], ["Accounting", 30], ["Marketing", 26]] },
+    { name: "Arts & Humanities", members: 96, depts: [["English", 34], ["Law", 30], ["Economics", 20]] },
+    { name: "Health & Life Sciences", members: 78, depts: [["Public Health", 26], ["Microbiology", 22], ["Nutrition", 18]] },
+  ];
+  document.getElementById("ftree").innerHTML = faculties.map(f => `
+    <div class="ftree__item">
+      <button class="ftree__head" type="button">
+        <span class="fic"><i data-lucide="layers"></i></span>
+        <b>${f.name}</b>
+        <span class="meta"><span>${f.depts.length} depts · ${f.members} members</span><i data-lucide="chevron-down" class="chev"></i></span>
+      </button>
+      <div class="ftree__body">
+        <div class="ftree__inner">
+          ${f.depts.map(d => `<div class="ftree__dept"><span class="d"></span><span class="n">${d[0]} Department Committee</span><span class="c">${d[1]} members</span></div>`).join("")}
+        </div>
+      </div>
+    </div>`).join("");
+  document.querySelectorAll(".ftree__item").forEach(item => {
+    const head = item.querySelector(".ftree__head");
+    const body = item.querySelector(".ftree__body");
+    head.addEventListener("click", () => {
+      const open = item.classList.toggle("open");
+      body.style.maxHeight = open ? body.scrollHeight + "px" : "0";
+    });
+  });
+
+  // Ring animation
+  const ring = document.getElementById("ring"), ringNum = document.getElementById("ringNum");
+  const io = new IntersectionObserver((es) => es.forEach(e => {
+    if (!e.isIntersecting) return; io.disconnect();
+    let n = 0; const t = setInterval(() => { n++; ring.style.setProperty("--val", n); ringNum.textContent = n; if (n >= perf) clearInterval(t); }, 16);
+  }), { threshold: 0.3 });
+  io.observe(ring);
+
+  // Nav + drawer
+  const nav = document.getElementById("nav");
+  window.addEventListener("scroll", () => nav.classList.toggle("is-scrolled", window.scrollY > 8), { passive: true });
+  const mn = document.getElementById("mobileNav");
+  document.getElementById("navToggle").addEventListener("click", () => mn.classList.add("is-open"));
+  document.getElementById("navClose").addEventListener("click", () => mn.classList.remove("is-open"));
+
+  window.lucide && window.lucide.createIcons();
+</script>
+</body>
+</html>
