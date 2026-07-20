@@ -1,0 +1,279 @@
+/* ============================================================================
+   JATIYATABADI CHHATRA DAL — PRIVATE UNIVERSITY WING
+   Design System / Theme Tokens
+   ----------------------------------------------------------------------------
+   A single source of truth for color, type scale, spacing (8px grid),
+   radius, shadow and motion. Consumed by every page. No inline CSS.
+   ============================================================================ */
+
+:root {
+  /* ---- Brand palette (understated, government-grade) ------------------- */
+  --green-900: #0a2a1a;
+  --green-800: #0f3d24;
+  --green-700: #14532d;   /* primary deep green */
+  --green-600: #1a6b3a;
+  --green-500: #22884b;
+  --green-050: #ecf6f0;
+
+  --maroon-900: #3d0d16;
+  --maroon-800: #5a121f;
+  --maroon-700: #7a1a2b;   /* rich maroon */
+  --maroon-600: #9a2338;
+
+  --gold-600: #b8860b;
+  --gold-500: #c9a227;
+  --gold-400: #d9b84a;     /* gold accent */
+  --gold-100: #f6edcf;
+
+  --ink-900: #10151a;
+  --ink-700: #2b333c;
+  --ink-500: #55606b;
+  --ink-400: #7b8794;
+  --ink-300: #aab3bd;
+  --line: #e5e9ec;
+  --paper: #ffffff;
+  --paper-2: #f7f9f8;
+  --paper-3: #eef3f0;
+
+  /* ---- Semantic ------------------------------------------------------- */
+  --brand: var(--green-700);
+  --brand-strong: var(--green-800);
+  --accent: var(--gold-500);
+  --danger: #b42318;
+  --warn: #b54708;
+  --ok: #067647;
+  --info: #1849a9;
+
+  /* ---- Typography ----------------------------------------------------- */
+  --font-bn: "Hind Siliguri", "Noto Sans Bengali", sans-serif;
+  --font-ui: "Inter", "Hind Siliguri", system-ui, -apple-system, sans-serif;
+
+  --fs-hero: clamp(2.6rem, 5.2vw, 4.4rem);
+  --fs-h1: clamp(2rem, 3.6vw, 3rem);
+  --fs-h2: clamp(1.55rem, 2.6vw, 2.1rem);
+  --fs-h3: 1.35rem;
+  --fs-title: 1.05rem;
+  --fs-body: 1rem;
+  --fs-cap: 0.875rem;
+  --fs-label: 0.75rem;
+
+  --lh-tight: 1.1;
+  --lh-snug: 1.3;
+  --lh-body: 1.65;
+
+  /* ---- Spacing (8px grid) -------------------------------------------- */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px;
+  --s-6: 32px; --s-7: 48px; --s-8: 64px; --s-9: 96px; --s-10: 128px;
+
+  /* ---- Radius --------------------------------------------------------- */
+  --r-btn: 12px;
+  --r-card: 16px;
+  --r-modal: 24px;
+  --r-pill: 999px;
+
+  /* ---- Shadows (soft, layered, Apple-style) --------------------------- */
+  --sh-xs: 0 1px 2px rgba(16, 21, 26, 0.05);
+  --sh-sm: 0 1px 3px rgba(16, 21, 26, 0.06), 0 1px 2px rgba(16, 21, 26, 0.04);
+  --sh-md: 0 6px 16px rgba(16, 21, 26, 0.08), 0 2px 4px rgba(16, 21, 26, 0.04);
+  --sh-lg: 0 18px 40px rgba(16, 21, 26, 0.12), 0 6px 12px rgba(16, 21, 26, 0.06);
+  --sh-xl: 0 30px 70px rgba(10, 42, 26, 0.18), 0 10px 24px rgba(16, 21, 26, 0.08);
+  --sh-gold: 0 8px 24px rgba(201, 162, 39, 0.28);
+
+  /* ---- Motion --------------------------------------------------------- */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 0.18s;
+  --dur-2: 0.32s;
+  --dur-3: 0.6s;
+
+  --container: 1200px;
+  --nav-h: 76px;
+}
+
+/* ============================================================================
+   RESET / BASE
+   ============================================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink-700);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+body.bn { font-family: var(--font-bn); }
+
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-ui);
+  color: var(--ink-900);
+  line-height: var(--lh-snug);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0 0 var(--s-4);
+}
+
+p { margin: 0 0 var(--s-4); }
+
+a { color: var(--brand); text-decoration: none; transition: color var(--dur-1) var(--ease); }
+a:hover { color: var(--green-600); }
+
+img { max-width: 100%; display: block; }
+
+:focus-visible {
+  outline: 3px solid var(--gold-400);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection { background: var(--gold-100); color: var(--green-800); }
+
+/* ============================================================================
+   LAYOUT PRIMITIVES
+   ============================================================================ */
+.container { width: 100%; max-width: var(--container); margin-inline: auto; padding-inline: var(--s-5); }
+.section { padding-block: var(--s-9); }
+.section--tight { padding-block: var(--s-8); }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: var(--s-2);
+  font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--maroon-700);
+}
+.eyebrow::before {
+  content: ""; width: 22px; height: 2px; background: var(--gold-500); border-radius: 2px;
+}
+
+.section-head { max-width: 720px; margin-bottom: var(--s-7); }
+.section-head h2 { font-size: var(--fs-h2); margin-top: var(--s-3); }
+.section-head .lead { font-size: 1.075rem; color: var(--ink-500); margin: 0; }
+
+.text-bn { font-family: var(--font-bn); }
+.muted { color: var(--ink-500); }
+.center { text-align: center; }
+.mx-auto { margin-inline: auto; }
+
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
+.btn {
+  --btn-bg: var(--brand);
+  --btn-fg: #fff;
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+  font-family: var(--font-ui); font-weight: 600; font-size: 0.95rem;
+  padding: 12px 22px; border-radius: var(--r-btn); border: 1px solid transparent;
+  background: var(--btn-bg); color: var(--btn-fg); cursor: pointer;
+  transition: transform var(--dur-1) var(--ease), box-shadow var(--dur-2) var(--ease),
+              background var(--dur-1) var(--ease);
+  white-space: nowrap;
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--sh-md); color: var(--btn-fg); }
+.btn:active { transform: translateY(0); }
+.btn svg { width: 18px; height: 18px; }
+
+.btn--primary { --btn-bg: var(--brand); }
+.btn--primary:hover { --btn-bg: var(--green-600); }
+.btn--gold { --btn-bg: linear-gradient(135deg, var(--gold-500), var(--gold-600)); --btn-fg: #201700; box-shadow: var(--sh-gold); }
+.btn--maroon { --btn-bg: var(--maroon-700); }
+.btn--ghost { --btn-bg: transparent; --btn-fg: var(--ink-900); border-color: var(--line); }
+.btn--ghost:hover { --btn-bg: var(--paper-2); box-shadow: var(--sh-sm); }
+.btn--on-dark { --btn-bg: rgba(255,255,255,0.08); --btn-fg: #fff; border-color: rgba(255,255,255,0.25); backdrop-filter: blur(8px); }
+.btn--on-dark:hover { --btn-bg: rgba(255,255,255,0.16); }
+.btn--lg { padding: 15px 28px; font-size: 1rem; }
+.btn--sm { padding: 8px 14px; font-size: 0.85rem; }
+.btn--block { width: 100%; }
+
+/* ============================================================================
+   CARDS / SURFACES
+   ============================================================================ */
+.card {
+  background: var(--paper); border: 1px solid var(--line); border-radius: var(--r-card);
+  box-shadow: var(--sh-sm); transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease);
+}
+.card--hover:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); }
+.card__body { padding: var(--s-5); }
+
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(18px) saturate(1.4);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--r-card);
+  box-shadow: var(--sh-md);
+}
+.glass--dark {
+  background: rgba(10, 42, 26, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(16px) saturate(1.2);
+}
+
+/* Pills / badges / chips */
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.04em;
+  padding: 5px 11px; border-radius: var(--r-pill); text-transform: uppercase;
+}
+.badge--gold { background: var(--gold-100); color: var(--gold-600); }
+.badge--green { background: var(--green-050); color: var(--green-700); }
+.badge--maroon { background: #fbe9ec; color: var(--maroon-700); }
+.badge--info { background: #eaf1fb; color: var(--info); }
+
+.grade {
+  display: inline-grid; place-items: center; width: 40px; height: 40px;
+  border-radius: 12px; font-weight: 800; font-size: 1.05rem; color: #fff;
+}
+.grade--A { background: linear-gradient(135deg, var(--green-500), var(--green-700)); }
+.grade--B { background: linear-gradient(135deg, #2f80ed, var(--info)); }
+.grade--C { background: linear-gradient(135deg, var(--gold-500), var(--gold-600)); color:#201700; }
+.grade--D { background: linear-gradient(135deg, #e57373, var(--danger)); }
+
+/* ============================================================================
+   DECORATIVE — Bengali-inspired geometric motif (understated)
+   ============================================================================ */
+.motif-line {
+  height: 4px; width: 100%; border-radius: 4px;
+  background: linear-gradient(90deg, var(--green-700), var(--gold-500) 50%, var(--maroon-700));
+  opacity: 0.9;
+}
+.paisley-bg {
+  background-image:
+    radial-gradient(circle at 12% 20%, rgba(201,162,39,0.06), transparent 25%),
+    radial-gradient(circle at 88% 12%, rgba(122,26,43,0.05), transparent 22%),
+    radial-gradient(circle at 50% 100%, rgba(20,83,45,0.06), transparent 30%);
+}
+
+/* Utility grid */
+.grid { display: grid; gap: var(--s-5); }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+@media (max-width: 900px) {
+  .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 620px) {
+  .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  .section { padding-block: var(--s-8); }
+}
+
+/* Accessibility helpers */
+.visually-hidden {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+.skip-link {
+  position: absolute; left: 12px; top: -60px; z-index: 2000;
+  background: var(--green-800); color: #fff; padding: 10px 16px; border-radius: 8px;
+  transition: top var(--dur-2) var(--ease);
+}
+.skip-link:focus { top: 12px; color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
