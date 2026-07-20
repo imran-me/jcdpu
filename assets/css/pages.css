@@ -731,6 +731,24 @@
 /* Locked control hint */
 .locked { opacity: .55; pointer-events: none; }
 
+/* Dashboard multi-panel console */
+.dash-panel { display: none; }
+.dash-panel.active { display: block; animation: panel-in .3s var(--ease); }
+@keyframes panel-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.dash__nav a { cursor: pointer; }
+.mini-btn { padding: 5px 11px; border-radius: 9px; font-size: .76rem; font-weight: 700; border: 1px solid var(--line); background: #fff; cursor: pointer; color: var(--ink-700); transition: border-color var(--dur-1), color var(--dur-1), background var(--dur-1); }
+.mini-btn:hover { border-color: var(--flag-green, #006a4e); color: var(--flag-green, #006a4e); }
+.mini-btn.danger:hover { border-color: var(--flag-red, #c8102e); color: var(--flag-red, #c8102e); background: #fff6f7; }
+.mini-btn.go:hover { background: var(--green-050); }
+.status-badge { display: inline-block; font-size: .7rem; font-weight: 800; padding: 3px 10px; border-radius: 999px; letter-spacing: .02em; }
+.status-Active { background: #e2f4ec; color: var(--flag-green, #006a4e); }
+.status-Pending { background: #fff4e0; color: #b54708; }
+.status-Suspended { background: #fdeaec; color: var(--flag-red, #c8102e); }
+.status-Renewing { background: #eaf1fb; color: #1849a9; }
+.status-Archived { background: #f0f0f0; color: #777; }
+.form-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 12px; }
+.form-row input, .form-row select { padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; font-family: var(--font-ui); font-size: .88rem; width: 100%; }
+
 /* ----------------------------------------------------------------------------
    LIGHTBOX (gallery viewer)
    ---------------------------------------------------------------------------- */

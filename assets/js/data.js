@@ -40,6 +40,34 @@
     { day: "01", mon: "SEP", title: "BNP Founding Anniversary rally", place: "Naya Paltan, Dhaka", img: "assets/img/tarique-manifesto.jpg" },
   ];
 
+  /* Members — sample nationalist-CV directory */
+  const members = [
+    { id: "m-ashiq",  name: "Ashiqur Rahman",  uni: "nsu",   dept: "Computer Science", batch: "2021", role: "President",            status: "Active",    grade: "A", joined: "2022", division: "Dhaka" },
+    { id: "m-tanvir", name: "Tanvir Hasan",     uni: "nsu",   dept: "BBA",              batch: "2021", role: "General Secretary",     status: "Active",    grade: "A", joined: "2022", division: "Dhaka" },
+    { id: "m-rakibul",name: "Rakibul Islam",    uni: "bracu", dept: "EEE",              batch: "2020", role: "President",            status: "Active",    grade: "A", joined: "2021", division: "Dhaka" },
+    { id: "m-sadia",  name: "Sadia Afroz",      uni: "bracu", dept: "Pharmacy",         batch: "2022", role: "Treasurer",            status: "Active",    grade: "B", joined: "2023", division: "Dhaka" },
+    { id: "m-fahim",  name: "Fahim Hossain",    uni: "leading",dept: "Law",             batch: "2021", role: "Organising Secretary", status: "Active",    grade: "B", joined: "2022", division: "Sylhet" },
+    { id: "m-nusrat", name: "Nusrat Jahan",     uni: "premier",dept: "English",         batch: "2022", role: "Vice President",       status: "Active",    grade: "B", joined: "2023", division: "Chattogram" },
+    { id: "m-arif",   name: "Arif Mahmud",      uni: "rmu",   dept: "Economics",        batch: "2023", role: "Member",               status: "Pending",   grade: "C", joined: "2024", division: "Rangpur" },
+    { id: "m-ishrat", name: "Ishrat Binte",     uni: "nwu",   dept: "Public Health",    batch: "2022", role: "Office Secretary",     status: "Active",    grade: "B", joined: "2023", division: "Khulna" },
+    { id: "m-sabbir", name: "Sabbir Rahman",    uni: "ugv",   dept: "CSE",              batch: "2023", role: "Member",               status: "Pending",   grade: "C", joined: "2024", division: "Barishal" },
+    { id: "m-mahin",  name: "Mahin Chowdhury",  uni: "diu",   dept: "Multimedia",       batch: "2021", role: "IT Secretary",         status: "Active",    grade: "A", joined: "2022", division: "Dhaka" },
+    { id: "m-rakib2", name: "Rakib Uddin",      uni: "varendra",dept: "Textile",        batch: "2022", role: "Member",               status: "Suspended", grade: "D", joined: "2023", division: "Rajshahi" },
+    { id: "m-samira", name: "Samira Haque",     uni: "iub",   dept: "Architecture",     batch: "2020", role: "Vice President",       status: "Active",    grade: "A", joined: "2021", division: "Dhaka" },
+  ];
+
+  /* Committees across the tiers */
+  const committees = [
+    { id: "c-nat",   name: "National Committee",             tier: "National",   uni: "",     status: "Active",   members: 260, term: "2024–2026" },
+    { id: "c-nsu",   name: "NSU University Unit",            tier: "University", uni: "nsu",  status: "Active",   members: 640, term: "2024–2026" },
+    { id: "c-brac",  name: "BRAC University Unit",           tier: "University", uni: "bracu",status: "Active",   members: 512, term: "2024–2026" },
+    { id: "c-nsu-cse",name: "NSU · CSE Department",          tier: "Department", uni: "nsu",  status: "Active",   members: 48,  term: "2025–2027" },
+    { id: "c-nsu-eng",name: "NSU · Engineering Faculty",     tier: "Faculty",    uni: "nsu",  status: "Active",   members: 210, term: "2025–2027" },
+    { id: "c-brac-bs",name: "BRAC · Business Faculty",       tier: "Faculty",    uni: "bracu",status: "Active",   members: 184, term: "2025–2027" },
+    { id: "c-rmu",   name: "Rangpur Metropolitan Unit",      tier: "University", uni: "rmu",  status: "Pending",  members: 168, term: "—" },
+    { id: "c-ugv",   name: "University of Global Village Unit",tier:"University", uni: "ugv",  status: "Renewing", members: 132, term: "2023–2025" },
+  ];
+
   const gradeClass = (g) => "grade grade--" + g;
 
   function uniCardHTML(u, hrefBase) {
@@ -103,6 +131,8 @@
     universities: universities,
     notices: notices,
     events: events,
+    members: members,
+    committees: committees,
     uniCardHTML: uniCardHTML,
     noticeHTML: noticeHTML,
     eventHTML: eventHTML,

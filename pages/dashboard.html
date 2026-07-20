@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Central Committee Dashboard | JCD Private University Wing</title>
-  <meta name="description" content="Admin dashboard — grade universities & members, broadcast notices, view rankings, growth and performance analytics." />
+  <title>Admin Console | JCD Private University Wing</title>
+  <meta name="description" content="Role-based admin console — manage universities, members, committees; grade units; publish notices; approvals and audit log." />
   <link rel="icon" href="../assets/img/logo-jcd.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -16,22 +16,20 @@
 <div class="dash">
   <!-- Sidebar -->
   <aside class="dash__side">
-    <div class="dash__brand"><img src="../assets/img/logo-jcd.png" alt="" /><div><b>ছাত্রদল</b><span>Central Console</span></div></div>
-    <nav class="dash__nav">
-      <a class="active" href="#"><i data-lucide="layout-dashboard"></i> Overview</a>
-      <a href="universities.html"><i data-lucide="building-2"></i> Universities</a>
-      <a href="member-profile.html"><i data-lucide="users"></i> Members</a>
-      <a href="#grading"><i data-lucide="award"></i> Grading</a>
-      <a href="#notices"><i data-lucide="bell-ring"></i> Notices</a>
-      <h6>Management</h6>
-      <a href="#"><i data-lucide="network"></i> Committees</a>
-      <a href="#"><i data-lucide="calendar-days"></i> Events</a>
-      <a href="#"><i data-lucide="file-text"></i> Reports</a>
-      <a href="#"><i data-lucide="check-circle-2"></i> Approvals <span class="badge badge--maroon" style="margin-left:auto;">7</span></a>
+    <div class="dash__brand"><img src="../assets/img/logo-jcd.png" alt="" /><div><b>ছাত্রদল</b><span>Admin Console</span></div></div>
+    <nav class="dash__nav" id="dashNav">
+      <a class="active" data-panel="overview"><i data-lucide="layout-dashboard"></i> Overview</a>
+      <a data-panel="universities"><i data-lucide="building-2"></i> Universities</a>
+      <a data-panel="members"><i data-lucide="users"></i> Members</a>
+      <a data-panel="committees"><i data-lucide="network"></i> Committees</a>
+      <a data-panel="notices"><i data-lucide="bell-ring"></i> Notices</a>
+      <h6>Governance</h6>
+      <a data-panel="approvals"><i data-lucide="check-circle-2"></i> Approvals <span class="badge badge--maroon" id="approvalsBadge" style="margin-left:auto;">0</span></a>
+      <a data-panel="reports"><i data-lucide="file-text"></i> Reports</a>
+      <a data-panel="audit"><i data-lucide="scroll-text"></i> Audit Log</a>
       <h6>System</h6>
-      <a href="#"><i data-lucide="shield"></i> Roles & Access</a>
-      <a href="#"><i data-lucide="scroll-text"></i> Audit Log</a>
-      <a href="../index.html"><i data-lucide="log-out"></i> Back to site</a>
+      <a href="universities.html"><i data-lucide="external-link"></i> Public Directory</a>
+      <a href="../index.html"><i data-lucide="home"></i> Back to site</a>
     </nav>
   </aside>
 
@@ -39,31 +37,27 @@
   <main class="dash__main">
     <div class="dash__top">
       <div>
-        <h1>Central Committee Overview</h1>
+        <h1 id="panelTitle">Central Committee Overview</h1>
         <p id="welcomeLine">Cycle Q3 2026</p>
       </div>
       <div class="d-flex gap-2 align-items-center">
-        <div class="search d-none d-xl-block" style="min-width:200px;"><i data-lucide="search"></i><input type="search" placeholder="Search units, members…" /></div>
         <div class="user-chip" id="userChip"></div>
         <button class="btn btn--ghost btn--sm" id="logoutBtn"><i data-lucide="log-out"></i> Logout</button>
       </div>
     </div>
 
-    <!-- KPIs -->
-    <div class="kpi-grid">
-      <div class="kpi"><div class="kpi__row"><div><span>University Units</span><b>142</b></div><div class="kpi__ic" style="background:var(--green-050);color:var(--green-700);"><i data-lucide="building-2"></i></div></div><span class="delta up"><i data-lucide="trending-up" style="width:14px;height:14px;"></i> +6 this quarter</span></div>
-      <div class="kpi"><div class="kpi__row"><div><span>Active Members</span><b>48,260</b></div><div class="kpi__ic" style="background:#eaf1fb;color:var(--info);"><i data-lucide="users"></i></div></div><span class="delta up"><i data-lucide="trending-up" style="width:14px;height:14px;"></i> +12.4%</span></div>
-      <div class="kpi"><div class="kpi__row"><div><span>Pending Approvals</span><b>7</b></div><div class="kpi__ic" style="background:#fbe9ec;color:var(--maroon-700);"><i data-lucide="clock"></i></div></div><span class="delta down"><i data-lucide="alert-circle" style="width:14px;height:14px;"></i> Needs review</span></div>
-      <div class="kpi"><div class="kpi__row"><div><span>Avg. Unit Grade</span><b>B+</b></div><div class="kpi__ic" style="background:var(--gold-100);color:var(--gold-600);"><i data-lucide="award"></i></div></div><span class="delta up"><i data-lucide="trending-up" style="width:14px;height:14px;"></i> Improving</span></div>
-    </div>
-
-    <div class="row g-4">
-      <!-- Growth chart -->
-      <div class="col-lg-8">
-        <div class="panel">
-          <div class="panel__head"><h3>Membership growth</h3><span class="badge badge--green">2026</span></div>
-          <div class="panel__body">
-            <div class="chart" id="chart">
+    <!-- ===================== OVERVIEW ===================== -->
+    <section class="dash-panel active" data-panel="overview">
+      <div class="kpi-grid">
+        <div class="kpi"><div class="kpi__row"><div><span>University Units</span><b id="kpiUni">142</b></div><div class="kpi__ic" style="background:var(--green-050);color:var(--green-700);"><i data-lucide="building-2"></i></div></div><span class="delta up"><i data-lucide="trending-up" style="width:14px;height:14px;"></i> +6 this quarter</span></div>
+        <div class="kpi"><div class="kpi__row"><div><span>Active Members</span><b>48,260</b></div><div class="kpi__ic" style="background:#eaf1fb;color:var(--info);"><i data-lucide="users"></i></div></div><span class="delta up"><i data-lucide="trending-up" style="width:14px;height:14px;"></i> +12.4%</span></div>
+        <div class="kpi"><div class="kpi__row"><div><span>Pending Approvals</span><b id="kpiPending">0</b></div><div class="kpi__ic" style="background:#fbe9ec;color:var(--maroon-700);"><i data-lucide="clock"></i></div></div><span class="delta down"><i data-lucide="alert-circle" style="width:14px;height:14px;"></i> Needs review</span></div>
+        <div class="kpi"><div class="kpi__row"><div><span>Avg. Unit Grade</span><b>B+</b></div><div class="kpi__ic" style="background:var(--gold-100);color:var(--gold-600);"><i data-lucide="award"></i></div></div><span class="delta up"><i data-lucide="trending-up" style="width:14px;height:14px;"></i> Improving</span></div>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="panel"><div class="panel__head"><h3>Membership growth</h3><span class="badge badge--green">2026</span></div>
+            <div class="panel__body"><div class="chart" id="chart">
               <div class="col"><div class="fill" data-h="45"></div><small>Jan</small></div>
               <div class="col"><div class="fill" data-h="52"></div><small>Feb</small></div>
               <div class="col"><div class="fill" data-h="60"></div><small>Mar</small></div>
@@ -71,64 +65,128 @@
               <div class="col"><div class="fill" data-h="72"></div><small>May</small></div>
               <div class="col"><div class="fill gold" data-h="88"></div><small>Jun</small></div>
               <div class="col"><div class="fill gold" data-h="100"></div><small>Jul</small></div>
-            </div>
+            </div></div>
           </div>
         </div>
+        <div class="col-lg-4">
+          <div class="panel"><div class="panel__head"><h3>Top-ranked units</h3></div><div class="panel__body" id="topUnits"></div></div>
+          <div class="panel"><div class="panel__head"><h3>Recent activity</h3></div><div class="panel__body" id="recentActivity"></div></div>
+        </div>
+      </div>
+    </section>
 
-        <!-- Grading table -->
-        <div class="panel" id="grading">
-          <div class="panel__head"><h3>University grading — Q3</h3><div class="d-flex gap-2"><button class="btn btn--ghost btn--sm" id="resetBtn"><i data-lucide="rotate-ccw"></i> Reset demo</button><button class="btn btn--ghost btn--sm"><i data-lucide="download"></i> Export</button></div></div>
-          <div class="panel__body" style="overflow-x:auto;">
-            <table class="table-clean">
-              <thead><tr><th>University</th><th>Division</th><th>Members</th><th>Activity</th><th>Grade</th><th>Action</th></tr></thead>
-              <tbody id="gradeBody"></tbody>
-            </table>
+    <!-- ===================== UNIVERSITIES ===================== -->
+    <section class="dash-panel" data-panel="universities">
+      <div class="panel">
+        <div class="panel__head"><h3>Add a university unit</h3></div>
+        <div class="panel__body" id="addUniForm">
+          <div class="form-row">
+            <input id="uName" placeholder="University name" />
+            <input id="uShort" placeholder="Short (e.g. NSU)" />
+            <select id="uDiv"><option>Dhaka</option><option>Chattogram</option><option>Sylhet</option><option>Rajshahi</option><option>Khulna</option><option>Barishal</option><option>Rangpur</option><option>Mymensingh</option></select>
+            <input id="uDist" placeholder="District" />
+            <button class="btn btn--primary btn--sm" id="uAdd"><i data-lucide="plus"></i> Add unit</button>
           </div>
         </div>
       </div>
-
-      <!-- Right column -->
-      <div class="col-lg-4">
-        <!-- Compose notice -->
-        <div class="panel" id="notices">
-          <div class="panel__head"><h3>Send a notice</h3></div>
-          <div class="panel__body notice-compose">
-            <label style="font-size:.8rem;font-weight:600;">Target audience</label>
-            <div class="seg mt-2 mb-3" id="seg">
-              <button class="active">National</button><button>Division</button><button>University</button><button>Individual</button>
-            </div>
-            <input id="ntitle" type="text" placeholder="Notice title" style="width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;" />
-            <textarea id="nbody" rows="3" placeholder="Write your notice…"></textarea>
-            <div class="d-flex gap-2 mt-3">
-              <select id="npriority" class="select" style="flex:1;min-width:0;"><option>Normal</option><option>Priority</option><option>Emergency</option></select>
-              <button id="npublish" class="btn btn--primary" style="flex:1;"><i data-lucide="send"></i> Publish</button>
-            </div>
-          </div>
+      <div class="panel">
+        <div class="panel__head"><h3>University grading &amp; status</h3><button class="btn btn--ghost btn--sm" id="resetBtn"><i data-lucide="rotate-ccw"></i> Reset demo</button></div>
+        <div class="panel__body" style="overflow-x:auto;">
+          <table class="table-clean"><thead><tr><th>University</th><th>Division</th><th>Members</th><th>Grade</th><th>Set grade</th><th>Status</th></tr></thead><tbody id="uniBody"></tbody></table>
         </div>
+      </div>
+    </section>
 
-        <!-- Top units -->
-        <div class="panel">
-          <div class="panel__head"><h3>Top-ranked units</h3></div>
-          <div class="panel__body">
-            <div class="rank-row"><div class="pos gold">1</div><div class="nm"><b>North South University</b><span>Dhaka · 640 members</span></div><span class="grade grade--A" style="width:32px;height:32px;font-size:.85rem;">A</span></div>
-            <div class="rank-row"><div class="pos gold">2</div><div class="nm"><b>Independent University</b><span>Dhaka · 421 members</span></div><span class="grade grade--A" style="width:32px;height:32px;font-size:.85rem;">A</span></div>
-            <div class="rank-row"><div class="pos gold">3</div><div class="nm"><b>BRAC University</b><span>Dhaka · 512 members</span></div><span class="grade grade--A" style="width:32px;height:32px;font-size:.85rem;">A</span></div>
-            <div class="rank-row"><div class="pos">4</div><div class="nm"><b>Daffodil Intl. University</b><span>Dhaka · 470 members</span></div><span class="grade grade--B" style="width:32px;height:32px;font-size:.85rem;">B</span></div>
-            <div class="rank-row"><div class="pos">5</div><div class="nm"><b>East West University</b><span>Dhaka · 356 members</span></div><span class="grade grade--B" style="width:32px;height:32px;font-size:.85rem;">B</span></div>
-          </div>
-        </div>
-
-        <!-- Recent activity -->
-        <div class="panel">
-          <div class="panel__head"><h3>Recent activity</h3></div>
-          <div class="panel__body">
-            <div class="rank-row"><div class="pos" style="background:var(--green-050);color:var(--green-700);"><i data-lucide="user-plus" style="width:15px;height:15px;"></i></div><div class="nm"><b>Varendra University unit approved</b><span>2 hours ago</span></div></div>
-            <div class="rank-row"><div class="pos" style="background:var(--gold-100);color:var(--gold-600);"><i data-lucide="award" style="width:15px;height:15px;"></i></div><div class="nm"><b>Q3 grades published</b><span>Yesterday</span></div></div>
-            <div class="rank-row"><div class="pos" style="background:#eaf1fb;color:var(--info);"><i data-lucide="bell" style="width:15px;height:15px;"></i></div><div class="nm"><b>National notice sent to 142 units</b><span>2 days ago</span></div></div>
+    <!-- ===================== MEMBERS ===================== -->
+    <section class="dash-panel" data-panel="members">
+      <div class="panel">
+        <div class="panel__head"><h3>Invite a member</h3></div>
+        <div class="panel__body">
+          <div class="form-row">
+            <input id="mName" placeholder="Full name" />
+            <input id="mDept" placeholder="Department" />
+            <select id="mUni"></select>
+            <input id="mRole" placeholder="Position (e.g. Member)" />
+            <button class="btn btn--primary btn--sm" id="mAdd"><i data-lucide="user-plus"></i> Invite</button>
           </div>
         </div>
       </div>
-    </div>
+      <div class="panel">
+        <div class="panel__head"><h3>Member management</h3><span class="badge badge--green" id="memberCount"></span></div>
+        <div class="panel__body" style="overflow-x:auto;">
+          <table class="table-clean"><thead><tr><th>Member</th><th>University</th><th>Department</th><th>Position</th><th>Status</th><th>Actions</th></tr></thead><tbody id="memberBody"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== COMMITTEES ===================== -->
+    <section class="dash-panel" data-panel="committees">
+      <div class="panel">
+        <div class="panel__head"><h3>Create a committee</h3></div>
+        <div class="panel__body">
+          <div class="form-row">
+            <input id="cName" placeholder="Committee name" />
+            <select id="cTier"><option>University</option><option>Faculty</option><option>Department</option><option>National</option></select>
+            <input id="cMembers" type="number" placeholder="Members" />
+            <button class="btn btn--primary btn--sm" id="cAdd"><i data-lucide="plus"></i> Create</button>
+          </div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel__head"><h3>Committee management</h3></div>
+        <div class="panel__body" style="overflow-x:auto;">
+          <table class="table-clean"><thead><tr><th>Committee</th><th>Tier</th><th>Members</th><th>Term</th><th>Status</th><th>Actions</th></tr></thead><tbody id="committeeBody"></tbody></table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== NOTICES ===================== -->
+    <section class="dash-panel" data-panel="notices">
+      <div class="row g-4">
+        <div class="col-lg-5">
+          <div class="panel"><div class="panel__head"><h3>Publish a notice</h3></div>
+            <div class="panel__body notice-compose">
+              <label style="font-size:.8rem;font-weight:600;">Target audience</label>
+              <div class="seg mt-2 mb-3" id="seg"><button class="active">National</button><button>Division</button><button>University</button><button>Individual</button></div>
+              <input id="ntitle" type="text" placeholder="Notice title" style="width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;" />
+              <textarea id="nbody" rows="3" placeholder="Write your notice…"></textarea>
+              <div class="d-flex gap-2 mt-3">
+                <select id="npriority" class="select" style="flex:1;min-width:0;"><option>Normal</option><option>Priority</option><option>Emergency</option></select>
+                <button id="npublish" class="btn btn--primary" style="flex:1;"><i data-lucide="send"></i> Publish</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="panel"><div class="panel__head"><h3>Published notices</h3><a class="btn btn--ghost btn--sm" href="notices.html"><i data-lucide="external-link"></i> Public board</a></div>
+            <div class="panel__body" id="noticeList" style="display:grid;gap:12px;"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== APPROVALS ===================== -->
+    <section class="dash-panel" data-panel="approvals">
+      <div class="panel"><div class="panel__head"><h3>Pending members</h3></div><div class="panel__body" id="pendingMembers"></div></div>
+      <div class="panel"><div class="panel__head"><h3>Pending committees</h3></div><div class="panel__body" id="pendingCommittees"></div></div>
+    </section>
+
+    <!-- ===================== REPORTS ===================== -->
+    <section class="dash-panel" data-panel="reports">
+      <div class="kpi-grid" id="reportKpis"></div>
+      <div class="panel"><div class="panel__head"><h3>Units by division</h3></div><div class="panel__body"><div class="chart" id="divChart"></div></div></div>
+    </section>
+
+    <!-- ===================== AUDIT ===================== -->
+    <section class="dash-panel" data-panel="audit">
+      <div class="panel"><div class="panel__head"><h3>Audit log</h3><button class="btn btn--ghost btn--sm" id="clearAudit"><i data-lucide="trash-2"></i> Clear</button></div>
+        <div class="panel__body" style="overflow-x:auto;">
+          <table class="table-clean"><thead><tr><th>When</th><th>User</th><th>Action</th></tr></thead><tbody id="auditBody"></tbody></table>
+          <p class="muted" id="auditEmpty" style="display:none;padding:var(--s-5);text-align:center;">No actions recorded yet. Grade a unit or publish a notice to see the log.</p>
+        </div>
+      </div>
+    </section>
+
   </main>
 </div>
 
@@ -139,11 +197,10 @@
 <script src="../assets/js/data.js"></script>
 <script src="../assets/js/store.js"></script>
 <script>
-  // --- Auth guard: admins → dashboard, members → their profile, guests → login ---
   var user = JCDAuth.current();
   if (!user) { location.replace("login.html"); }
   else if (!JCDAuth.can("viewDash")) { location.replace("member-profile.html"); }
-  else { initDashboard(user); }
+  else { boot(user); }
 
   function toast(msg, err) {
     var h = document.getElementById("toastHost");
@@ -152,70 +209,193 @@
     h.appendChild(t); if (window.lucide) lucide.createIcons();
     setTimeout(function () { t.remove(); }, 2600);
   }
+  function el(id) { return document.getElementById(id); }
+  function gate(perm) { if (!JCDAuth.can(perm)) { toast("Your role cannot perform this action", true); return false; } return true; }
 
-  function initDashboard(user) {
-    var universities = window.JCD.universities;
+  function boot(user) {
+    var JCD = window.JCD, S = window.JCDStore;
+    var uniName = {}; JCD.universities.forEach(function (u) { uniName[u.id] = u.short; });
 
-    // User chip / welcome / logout
+    // Header
     var ini = user.name.split(" ").map(function (w) { return w[0]; }).slice(0, 2).join("");
-    document.getElementById("userChip").innerHTML = '<span class="av">' + ini + '</span><span><b>' + user.name + '</b><span>' + JCDAuth.roleLabel(user.role) + '</span></span>';
-    document.getElementById("welcomeLine").textContent = "Welcome back, " + user.name + " · " + JCDAuth.roleLabel(user.role);
-    document.getElementById("logoutBtn").addEventListener("click", function () { JCDAuth.logout(); location.href = "login.html"; });
+    el("userChip").innerHTML = '<span class="av">' + ini + '</span><span><b>' + user.name + '</b><span>' + JCDAuth.roleLabel(user.role) + '</span></span>';
+    el("welcomeLine").textContent = "Welcome back, " + user.name + " · " + JCDAuth.roleLabel(user.role);
+    el("logoutBtn").addEventListener("click", function () { JCDAuth.logout(); location.href = "login.html"; });
 
-    // Grading table (reads persisted grades via store.js)
-    var canGrade = JCDAuth.can("grade");
-    var gbody = document.getElementById("gradeBody");
-    gbody.innerHTML = universities.slice(0, 10).map(function (u) {
-      var activity = Math.min(99, 55 + (u.members % 45));
-      return "<tr><td><b>" + u.name + "</b></td><td>" + u.division + "</td><td>" + u.members + "</td>" +
-        '<td><div class="bar__track" style="width:90px;"><div class="bar__fill" style="width:' + activity + '%;"></div></div></td>' +
-        '<td><span class="grade grade--' + u.grade + '" id="badge-' + u.id + '">' + u.grade + "</span></td>" +
-        '<td><select class="select gsel" data-uni="' + u.id + '" style="min-width:auto;padding:6px 10px;font-size:.82rem;">' +
-        ["A", "B", "C", "D"].map(function (g) { return "<option " + (u.grade === g ? "selected" : "") + ">" + g + "</option>"; }).join("") +
-        "</select></td></tr>";
-    }).join("");
-    document.querySelectorAll(".gsel").forEach(function (sel) {
-      if (!canGrade) { sel.disabled = true; sel.classList.add("locked"); return; }
-      sel.addEventListener("change", function () {
-        var id = sel.dataset.uni, g = sel.value;
-        JCDStore.setGrade(id, g);
-        var badge = document.getElementById("badge-" + id);
-        if (badge) { badge.className = "grade grade--" + g; badge.id = "badge-" + id; badge.textContent = g; }
-        toast("Grade saved: " + id.toUpperCase() + " → " + g + " (live on the public directory)");
-      });
+    var titles = { overview: "Central Committee Overview", universities: "University Management", members: "Member Management", committees: "Committee Management", notices: "Notice Management", approvals: "Approvals Queue", reports: "Reports & Analytics", audit: "Audit Log" };
+
+    /* -------- Panel switching -------- */
+    function show(name) {
+      document.querySelectorAll(".dash-panel").forEach(function (p) { p.classList.toggle("active", p.dataset.panel === name); });
+      document.querySelectorAll("#dashNav a[data-panel]").forEach(function (a) { a.classList.toggle("active", a.dataset.panel === name); });
+      el("panelTitle").textContent = titles[name] || "Console";
+      if (name === "audit") renderAudit();
+      if (window.lucide) lucide.createIcons();
+      location.hash = name;
+    }
+    document.querySelectorAll("#dashNav a[data-panel]").forEach(function (a) {
+      a.addEventListener("click", function (e) { e.preventDefault(); show(a.dataset.panel); });
     });
 
-    // Notice composer
+    /* -------- Overview -------- */
+    el("kpiUni").textContent = JCD.universities.length + 130; // headline scale
+    var ranked = JCD.universities.slice().sort(function (a, b) { return b.members - a.members; }).slice(0, 5);
+    el("topUnits").innerHTML = ranked.map(function (u, i) {
+      return '<div class="rank-row"><div class="pos ' + (i < 3 ? "gold" : "") + '">' + (i + 1) + '</div><div class="nm"><b>' + u.name + '</b><span>' + u.division + ' · ' + u.members + ' members</span></div><span class="grade grade--' + u.grade + '" style="width:32px;height:32px;font-size:.85rem;">' + u.grade + '</span></div>';
+    }).join("");
+    function renderRecent() {
+      var a = S.getAudit().slice(0, 4);
+      el("recentActivity").innerHTML = a.length ? a.map(function (x) {
+        return '<div class="rank-row"><div class="pos" style="background:var(--green-050);color:var(--green-700);"><i data-lucide="activity" style="width:15px;height:15px;"></i></div><div class="nm"><b>' + x.action + '</b><span>' + timeAgo(x.ts) + ' · ' + x.user + '</span></div></div>';
+      }).join("") : '<p class="muted" style="font-size:.85rem;">No recent admin actions. Try grading a unit or publishing a notice.</p>';
+      if (window.lucide) lucide.createIcons();
+    }
+    function timeAgo(ts) { var s = Math.floor((Date.now() - ts) / 1000); if (s < 60) return "just now"; if (s < 3600) return Math.floor(s / 60) + "m ago"; if (s < 86400) return Math.floor(s / 3600) + "h ago"; return Math.floor(s / 86400) + "d ago"; }
+    renderRecent();
+
+    // chart animate
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; io.disconnect(); document.querySelectorAll("#chart .fill").forEach(function (f) { f.style.height = f.dataset.h + "%"; }); }); }, { threshold: 0.2 });
+    io.observe(el("chart"));
+
+    /* -------- Universities -------- */
+    var canGrade = JCDAuth.can("grade"), canEditUni = JCDAuth.can("editUni");
+    function renderUnis() {
+      el("uniBody").innerHTML = JCD.universities.map(function (u) {
+        var gsel = ["A","B","C","D"].map(function (g) { return "<option " + (u.grade === g ? "selected" : "") + ">" + g + "</option>"; }).join("");
+        var ssel = ["Active","Renewing","Archived"].map(function (s) { return "<option " + (u.status === s ? "selected" : "") + ">" + s + "</option>"; }).join("");
+        return "<tr><td><b>" + u.name + "</b></td><td>" + u.division + "</td><td>" + u.members + "</td>" +
+          '<td><span class="grade grade--' + u.grade + '" id="gb-' + u.id + '">' + u.grade + "</span></td>" +
+          '<td><select class="select" data-gr="' + u.id + '" ' + (canGrade ? "" : "disabled") + ' style="min-width:auto;padding:6px 10px;font-size:.82rem;">' + gsel + "</select></td>" +
+          '<td><select class="select" data-st="' + u.id + '" ' + (canEditUni ? "" : "disabled") + ' style="min-width:auto;padding:6px 10px;font-size:.82rem;">' + ssel + "</select></td></tr>";
+      }).join("");
+      document.querySelectorAll("[data-gr]").forEach(function (sel) { sel.addEventListener("change", function () { if (!gate("grade")) { renderUnis(); return; } S.setGrade(sel.dataset.gr, sel.value, user.name); var b = el("gb-" + sel.dataset.gr); if (b) { b.className = "grade grade--" + sel.value; b.textContent = sel.value; } toast("Grade saved: " + sel.dataset.gr.toUpperCase() + " → " + sel.value); renderRecent(); }); });
+      document.querySelectorAll("[data-st]").forEach(function (sel) { sel.addEventListener("change", function () { if (!gate("editUni")) return; var u = JCD.universities.filter(function (x) { return x.id === sel.dataset.st; })[0]; u.status = sel.value; S.logAudit(user.name, "Set " + sel.dataset.st.toUpperCase() + " status → " + sel.value); toast("Status updated"); renderRecent(); }); });
+    }
+    el("uAdd").addEventListener("click", function () {
+      if (!gate("editUni")) return;
+      var name = el("uName").value.trim(), sh = el("uShort").value.trim();
+      if (!name || !sh) { toast("Enter name and short code", true); return; }
+      var id = sh.toLowerCase().replace(/[^a-z0-9]/g, "") + "-" + Math.floor(Date.now() / 1000 % 100000);
+      S.addUniversity({ id: id, name: name, short: sh, division: el("uDiv").value, district: el("uDist").value || el("uDiv").value, type: "Private", status: "Pending", grade: "C", members: 0, committees: 0, established: 2026, cover: "" }, user.name);
+      el("uName").value = ""; el("uShort").value = ""; el("uDist").value = "";
+      renderUnis(); toast("University unit added — pending approval"); renderRecent();
+    });
+
+    /* -------- Members -------- */
+    var canMembers = JCDAuth.can("manageMembers");
+    el("mUni").innerHTML = JCD.universities.map(function (u) { return '<option value="' + u.id + '">' + u.short + "</option>"; }).join("");
+    function renderMembers() {
+      var m = S.getMembers();
+      el("memberCount").textContent = m.length + " members";
+      el("memberBody").innerHTML = m.map(function (x) {
+        var actions = canMembers ?
+          '<button class="mini-btn" data-act="Active" data-m="' + x.id + '">Approve</button> ' +
+          '<button class="mini-btn danger" data-act="Suspended" data-m="' + x.id + '">Suspend</button> ' +
+          '<a class="mini-btn go" href="member-profile.html">View</a>' : '<span class="muted" style="font-size:.78rem;">View only</span>';
+        return "<tr><td><b>" + x.name + "</b><br><span class='muted' style='font-size:.75rem;'>Batch " + x.batch + "</span></td><td>" + (uniName[x.uni] || x.uni) + "</td><td>" + x.dept + "</td><td>" + x.role + "</td>" +
+          '<td><span class="status-badge status-' + x.status + '">' + x.status + "</span></td><td>" + actions + "</td></tr>";
+      }).join("");
+      document.querySelectorAll("[data-m]").forEach(function (b) { b.addEventListener("click", function () { if (!gate("manageMembers")) return; S.setMemberStatus(b.dataset.m, b.dataset.act, user.name); renderMembers(); renderApprovals(); renderRecent(); toast("Member " + b.dataset.act.toLowerCase()); }); });
+    }
+    el("mAdd").addEventListener("click", function () {
+      if (!gate("manageMembers")) return;
+      var name = el("mName").value.trim(); if (!name) { toast("Enter member name", true); return; }
+      S.addMember({ id: "m-" + Math.floor(Date.now() / 1000 % 1000000), name: name, uni: el("mUni").value, dept: el("mDept").value || "—", batch: "2026", role: el("mRole").value || "Member", status: "Pending", grade: "C", joined: "2026", division: "Dhaka" }, user.name);
+      el("mName").value = ""; el("mDept").value = ""; el("mRole").value = "";
+      renderMembers(); renderApprovals(); renderRecent(); toast("Member invited — pending approval");
+    });
+
+    /* -------- Committees -------- */
+    function renderCommittees() {
+      var c = S.getCommittees();
+      el("committeeBody").innerHTML = c.map(function (x) {
+        var actions = canMembers ?
+          (x.status === "Pending" ? '<button class="mini-btn" data-cst="Active" data-c="' + x.id + '">Approve</button> ' : "") +
+          (x.status !== "Archived" ? '<button class="mini-btn" data-cst="Renewing" data-c="' + x.id + '">Renew</button> <button class="mini-btn danger" data-cst="Archived" data-c="' + x.id + '">Archive</button>' : '<button class="mini-btn" data-cst="Active" data-c="' + x.id + '">Reactivate</button>')
+          : '<span class="muted" style="font-size:.78rem;">View only</span>';
+        return "<tr><td><b>" + x.name + "</b></td><td>" + x.tier + "</td><td>" + x.members + "</td><td>" + x.term + "</td>" +
+          '<td><span class="status-badge status-' + x.status + '">' + x.status + "</span></td><td>" + actions + "</td></tr>";
+      }).join("");
+      document.querySelectorAll("[data-c]").forEach(function (b) { b.addEventListener("click", function () { if (!gate("manageMembers")) return; S.setCommitteeStatus(b.dataset.c, b.dataset.cst, user.name); renderCommittees(); renderApprovals(); renderRecent(); toast("Committee " + b.dataset.cst.toLowerCase()); }); });
+    }
+    el("cAdd").addEventListener("click", function () {
+      if (!gate("manageMembers")) return;
+      var name = el("cName").value.trim(); if (!name) { toast("Enter committee name", true); return; }
+      S.addCommittee({ id: "c-" + Math.floor(Date.now() / 1000 % 1000000), name: name, tier: el("cTier").value, uni: "", status: "Pending", members: +el("cMembers").value || 0, term: "—" }, user.name);
+      el("cName").value = ""; el("cMembers").value = "";
+      renderCommittees(); renderApprovals(); renderRecent(); toast("Committee created — pending approval");
+    });
+
+    /* -------- Notices -------- */
     var canNotice = JCDAuth.can("notice");
     if (!canNotice) document.querySelector(".notice-compose").classList.add("locked");
-    document.getElementById("npublish").addEventListener("click", function () {
-      if (!canNotice) { toast("You do not have permission to publish notices", true); return; }
-      var title = document.getElementById("ntitle").value.trim();
-      var bodyv = document.getElementById("nbody").value.trim();
-      if (!title) { toast("Please enter a notice title", true); return; }
-      var target = (document.querySelector("#seg button.active") || {}).textContent || "National";
-      var priority = document.getElementById("npriority").value;
-      var d = new Date();
-      var mon = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][d.getMonth()];
-      var day = ("0" + d.getDate()).slice(-2);
-      var tags = [target]; if (priority !== "Normal") tags.push(priority);
-      JCDStore.addNotice({ day: day, mon: mon, title: title, body: bodyv || "(no details)", tags: tags });
-      document.getElementById("ntitle").value = ""; document.getElementById("nbody").value = "";
-      toast("Notice published to " + target + " — now visible on the homepage");
-    });
-
-    // Reset demo edits
-    document.getElementById("resetBtn").addEventListener("click", function () {
-      JCDStore.resetAll(); toast("Demo edits cleared"); setTimeout(function () { location.reload(); }, 600);
-    });
-
-    // Chart animation
-    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; io.disconnect(); document.querySelectorAll("#chart .fill").forEach(function (f) { f.style.height = f.dataset.h + "%"; }); }); }, { threshold: 0.3 });
-    io.observe(document.getElementById("chart"));
-
-    // Segmented control
     document.querySelectorAll("#seg button").forEach(function (b) { b.addEventListener("click", function () { document.querySelectorAll("#seg button").forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active"); }); });
+    function renderNotices() {
+      el("noticeList").innerHTML = S.getNotices().slice(0, 8).map(function (n) { return JCD.noticeHTML(n); }).join("");
+      if (window.lucide) lucide.createIcons();
+    }
+    el("npublish").addEventListener("click", function () {
+      if (!gate("notice")) return;
+      var title = el("ntitle").value.trim(); if (!title) { toast("Enter a notice title", true); return; }
+      var target = (document.querySelector("#seg button.active") || {}).textContent || "National";
+      var pr = el("npriority").value, d = new Date();
+      var mon = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][d.getMonth()], day = ("0" + d.getDate()).slice(-2);
+      var tags = [target]; if (pr !== "Normal") tags.push(pr);
+      S.addNotice({ day: day, mon: mon, title: title, body: el("nbody").value.trim() || "(no details)", tags: tags }, user.name);
+      el("ntitle").value = ""; el("nbody").value = "";
+      renderNotices(); renderRecent(); toast("Notice published to " + target + " — live on the public board");
+    });
 
+    /* -------- Approvals -------- */
+    function renderApprovals() {
+      var pm = S.getMembers().filter(function (x) { return x.status === "Pending"; });
+      var pc = S.getCommittees().filter(function (x) { return x.status === "Pending"; });
+      el("approvalsBadge").textContent = pm.length + pc.length;
+      el("kpiPending").textContent = pm.length + pc.length;
+      el("pendingMembers").innerHTML = pm.length ? pm.map(function (x) {
+        return '<div class="rank-row"><div class="nm"><b>' + x.name + '</b><span>' + (uniName[x.uni] || x.uni) + ' · ' + x.dept + '</span></div>' +
+          '<div class="d-flex gap-2"><button class="mini-btn" data-ap="Active" data-am="' + x.id + '">Approve</button><button class="mini-btn danger" data-ap="Suspended" data-am="' + x.id + '">Reject</button></div></div>';
+      }).join("") : '<p class="muted" style="font-size:.85rem;">No pending members.</p>';
+      el("pendingCommittees").innerHTML = pc.length ? pc.map(function (x) {
+        return '<div class="rank-row"><div class="nm"><b>' + x.name + '</b><span>' + x.tier + ' · ' + x.members + ' members</span></div>' +
+          '<div class="d-flex gap-2"><button class="mini-btn" data-cp="Active" data-ac="' + x.id + '">Approve</button><button class="mini-btn danger" data-cp="Archived" data-ac="' + x.id + '">Reject</button></div></div>';
+      }).join("") : '<p class="muted" style="font-size:.85rem;">No pending committees.</p>';
+      document.querySelectorAll("[data-am]").forEach(function (b) { b.addEventListener("click", function () { if (!gate("manageMembers")) return; S.setMemberStatus(b.dataset.am, b.dataset.ap, user.name); renderMembers(); renderApprovals(); renderRecent(); toast("Member " + b.dataset.ap.toLowerCase()); }); });
+      document.querySelectorAll("[data-ac]").forEach(function (b) { b.addEventListener("click", function () { if (!gate("manageMembers")) return; S.setCommitteeStatus(b.dataset.ac, b.dataset.cp, user.name); renderCommittees(); renderApprovals(); renderRecent(); toast("Committee " + b.dataset.cp.toLowerCase()); }); });
+    }
+
+    /* -------- Reports -------- */
+    function renderReports() {
+      var divs = {}; JCD.universities.forEach(function (u) { divs[u.division] = (divs[u.division] || 0) + 1; });
+      var total = JCD.universities.length, act = S.getMembers().filter(function (m) { return m.status === "Active"; }).length;
+      el("reportKpis").innerHTML =
+        kpi("Total units", total, "building-2", "var(--green-050)", "var(--green-700)") +
+        kpi("Active members (sample)", act, "users", "#eaf1fb", "var(--info)") +
+        kpi("Committees", S.getCommittees().length, "network", "var(--gold-100)", "var(--gold-600)") +
+        kpi("Divisions covered", Object.keys(divs).length, "map", "#fbe9ec", "var(--maroon-700)");
+      var max = Math.max.apply(null, Object.values(divs));
+      el("divChart").innerHTML = Object.keys(divs).map(function (d) {
+        return '<div class="col"><div class="fill" style="height:' + Math.round(divs[d] / max * 100) + '%;"></div><small>' + d.slice(0, 4) + '</small></div>';
+      }).join("");
+    }
+    function kpi(label, val, icon, bg, fg) { return '<div class="kpi"><div class="kpi__row"><div><span>' + label + '</span><b>' + val + '</b></div><div class="kpi__ic" style="background:' + bg + ';color:' + fg + ';"><i data-lucide="' + icon + '"></i></div></div></div>'; }
+
+    /* -------- Audit -------- */
+    function renderAudit() {
+      var a = S.getAudit();
+      el("auditEmpty").style.display = a.length ? "none" : "block";
+      el("auditBody").innerHTML = a.map(function (x) { return "<tr><td>" + timeAgo(x.ts) + "</td><td><b>" + x.user + "</b></td><td>" + x.action + "</td></tr>"; }).join("");
+    }
+    el("clearAudit").addEventListener("click", function () { localStorage.removeItem("jcd_audit"); renderAudit(); renderRecent(); toast("Audit log cleared"); });
+
+    /* -------- Reset -------- */
+    el("resetBtn").addEventListener("click", function () { S.resetAll(); toast("Demo edits cleared — reloading"); setTimeout(function () { location.reload(); }, 700); });
+
+    // Initial renders
+    renderUnis(); renderMembers(); renderCommittees(); renderNotices(); renderApprovals(); renderReports();
+    // Deep-link via hash
+    var start = (location.hash || "#overview").slice(1);
+    if (titles[start]) show(start); else show("overview");
     if (window.lucide) lucide.createIcons();
   }
 </script>
