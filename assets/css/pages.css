@@ -752,6 +752,10 @@
 /* Locked control hint */
 .locked { opacity: .55; pointer-events: none; }
 
+/* Inline profile edit fields */
+.edit-field { padding: 10px 12px; border: 1px solid var(--flag-green, #006a4e); border-radius: 10px; font-family: var(--font-ui); font-size: .92rem; background: #fff; box-shadow: 0 0 0 4px rgba(0,106,78,.08); }
+.edit-field:focus { outline: none; border-color: var(--flag-green, #006a4e); box-shadow: 0 0 0 4px rgba(0,106,78,.15); }
+
 /* Dashboard multi-panel console */
 .dash-panel { display: none; }
 .dash-panel.active { display: block; animation: panel-in .3s var(--ease); }
