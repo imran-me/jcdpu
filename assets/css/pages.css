@@ -83,10 +83,11 @@
 .nav__toggle svg { width: 26px; height: 26px; }
 .mobile-nav {
   position: fixed; inset: 0; z-index: 1100; background: var(--paper);
-  transform: translateX(100%); transition: transform var(--dur-2) var(--ease-in-out);
-  padding: var(--s-5); overflow-y: auto; display: flex; flex-direction: column; gap: var(--s-2);
+  padding: var(--s-5); overflow-y: auto; display: none; flex-direction: column; gap: var(--s-2);
 }
-.mobile-nav.is-open { transform: translateX(0); }
+/* Hidden with display:none (not translateX) so it never creates horizontal overflow */
+.mobile-nav.is-open { display: flex; animation: drawer-in var(--dur-2) var(--ease); }
+@keyframes drawer-in { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
 .mobile-nav__head { display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s-4); }
 .mobile-nav a { padding: 14px 12px; border-radius: 12px; font-weight: 600; color: var(--ink-900); font-size: 1.05rem; }
 .mobile-nav a:hover { background: var(--paper-2); }
