@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Central Committee Dashboard | JCD Private University Wing</title>
+  <meta name="description" content="Admin dashboard — grade universities & members, broadcast notices, view rankings, growth and performance analytics." />
+  <link rel="icon" href="../assets/img/logo-jcd.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/theme.css" />
+  <link rel="stylesheet" href="../assets/css/pages.css" />
+  <link rel="stylesheet" href="../assets/css/luxury.css" />
+</head>
+<body>
+<div class="dash">
+  <!-- Sidebar -->
+  <aside class="dash__side">
+    <div class="dash__brand"><img src="../assets/img/logo-jcd.png" alt="" /><div><b>ছাত্রদল</b><span>Central Console</span></div></div>
+    <nav class="dash__nav">
+      <a class="active" href="#"><i data-lucide="layout-dashboard"></i> Overview</a>
+      <a href="universities.html"><i data-lucide="building-2"></i> Universities</a>
+      <a href="member-profile.html"><i data-lucide="users"></i> Members</a>
+      <a href="#grading"><i data-lucide="award"></i> Grading</a>
+      <a href="#notices"><i data-lucide="bell-ring"></i> Notices</a>
+      <h6>Management</h6>
+      <a href="#"><i data-lucide="network"></i> Committees</a>
+      <a href="#"><i data-lucide="calendar-days"></i> Events</a>
+      <a href="#"><i data-lucide="file-text"></i> Reports</a>
+      <a href="#"><i data-lucide="check-circle-2"></i> Approvals <span class="badge badge--maroon" style="margin-left:auto;">7</span></a>
+      <h6>System</h6>
+      <a href="#"><i data-lucide="shield"></i> Roles & Access</a>
+      <a href="#"><i data-lucide="scroll-text"></i> Audit Log</a>
+      <a href="../index.html"><i data-lucide="log-out"></i> Back to site</a>
+    </nav>
+  </aside>
+
+  <!-- Main -->
+  <main class="dash__main">
+    <div class="dash__top">
+      <div>
+        <h1>Central Committee Overview</h1>
+        <p id="welcomeLine">Cycle Q3 2026</p>
+      </div>
+      <div class="d-flex gap-2 align-items-center">
+        <div class="search d-none d-xl-block" style="min-width:200px;"><i data-lucide="search"></i><input type="search" placeholder="Search units, members…" /></div>
+        <div class="user-chip" id="userChip"></div>
+        <button class="btn btn--ghost btn--sm" id="logoutBtn"><i data-lucide="log-out"></i> Logout</button>
+      </div>
+    </div>
+
+    <!-- KPIs -->
+    <div class="kpi-grid">
+      <div class="kpi"><div class="kpi__row"><div><span>University Units</span><b>142</b></div><div class="kpi__ic" style="background:var(--green-050);color:var(--green-700);"><i data-lucide="building-2"></i></div></div><span class="delta up"><i data-lucide="trending-up" style="width:14px;height:14px;"></i> +6 this quarter</span></div>
+      <div class="kpi"><div class="kpi__row"><div><span>Active Members</span><b>48,260</b></div><div class="kpi__ic" style="background:#eaf1fb;color:var(--info);"><i data-lucide="users"></i></div></div><span class="delta up"><i data-lucide="trending-up" style="width:14px;height:14px;"></i> +12.4%</span></div>
+      <div class="kpi"><div class="kpi__row"><div><span>Pending Approvals</span><b>7</b></div><div class="kpi__ic" style="background:#fbe9ec;color:var(--maroon-700);"><i data-lucide="clock"></i></div></div><span class="delta down"><i data-lucide="alert-circle" style="width:14px;height:14px;"></i> Needs review</span></div>
+      <div class="kpi"><div class="kpi__row"><div><span>Avg. Unit Grade</span><b>B+</b></div><div class="kpi__ic" style="background:var(--gold-100);color:var(--gold-600);"><i data-lucide="award"></i></div></div><span class="delta up"><i data-lucide="trending-up" style="width:14px;height:14px;"></i> Improving</span></div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Growth chart -->
+      <div class="col-lg-8">
+        <div class="panel">
+          <div class="panel__head"><h3>Membership growth</h3><span class="badge badge--green">2026</span></div>
+          <div class="panel__body">
+            <div class="chart" id="chart">
+              <div class="col"><div class="fill" data-h="45"></div><small>Jan</small></div>
+              <div class="col"><div class="fill" data-h="52"></div><small>Feb</small></div>
+              <div class="col"><div class="fill" data-h="60"></div><small>Mar</small></div>
+              <div class="col"><div class="fill" data-h="58"></div><small>Apr</small></div>
+              <div class="col"><div class="fill" data-h="72"></div><small>May</small></div>
+              <div class="col"><div class="fill gold" data-h="88"></div><small>Jun</small></div>
+              <div class="col"><div class="fill gold" data-h="100"></div><small>Jul</small></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Grading table -->
+        <div class="panel" id="grading">
+          <div class="panel__head"><h3>University grading — Q3</h3><div class="d-flex gap-2"><button class="btn btn--ghost btn--sm" id="resetBtn"><i data-lucide="rotate-ccw"></i> Reset demo</button><button class="btn btn--ghost btn--sm"><i data-lucide="download"></i> Export</button></div></div>
+          <div class="panel__body" style="overflow-x:auto;">
+            <table class="table-clean">
+              <thead><tr><th>University</th><th>Division</th><th>Members</th><th>Activity</th><th>Grade</th><th>Action</th></tr></thead>
+              <tbody id="gradeBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right column -->
+      <div class="col-lg-4">
+        <!-- Compose notice -->
+        <div class="panel" id="notices">
+          <div class="panel__head"><h3>Send a notice</h3></div>
+          <div class="panel__body notice-compose">
+            <label style="font-size:.8rem;font-weight:600;">Target audience</label>
+            <div class="seg mt-2 mb-3" id="seg">
+              <button class="active">National</button><button>Division</button><button>University</button><button>Individual</button>
+            </div>
+            <input id="ntitle" type="text" placeholder="Notice title" style="width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:12px;margin-bottom:10px;" />
+            <textarea id="nbody" rows="3" placeholder="Write your notice…"></textarea>
+            <div class="d-flex gap-2 mt-3">
+              <select id="npriority" class="select" style="flex:1;min-width:0;"><option>Normal</option><option>Priority</option><option>Emergency</option></select>
+              <button id="npublish" class="btn btn--primary" style="flex:1;"><i data-lucide="send"></i> Publish</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top units -->
+        <div class="panel">
+          <div class="panel__head"><h3>Top-ranked units</h3></div>
+          <div class="panel__body">
+            <div class="rank-row"><div class="pos gold">1</div><div class="nm"><b>North South University</b><span>Dhaka · 640 members</span></div><span class="grade grade--A" style="width:32px;height:32px;font-size:.85rem;">A</span></div>
+            <div class="rank-row"><div class="pos gold">2</div><div class="nm"><b>Independent University</b><span>Dhaka · 421 members</span></div><span class="grade grade--A" style="width:32px;height:32px;font-size:.85rem;">A</span></div>
+            <div class="rank-row"><div class="pos gold">3</div><div class="nm"><b>BRAC University</b><span>Dhaka · 512 members</span></div><span class="grade grade--A" style="width:32px;height:32px;font-size:.85rem;">A</span></div>
+            <div class="rank-row"><div class="pos">4</div><div class="nm"><b>Daffodil Intl. University</b><span>Dhaka · 470 members</span></div><span class="grade grade--B" style="width:32px;height:32px;font-size:.85rem;">B</span></div>
+            <div class="rank-row"><div class="pos">5</div><div class="nm"><b>East West University</b><span>Dhaka · 356 members</span></div><span class="grade grade--B" style="width:32px;height:32px;font-size:.85rem;">B</span></div>
+          </div>
+        </div>
+
+        <!-- Recent activity -->
+        <div class="panel">
+          <div class="panel__head"><h3>Recent activity</h3></div>
+          <div class="panel__body">
+            <div class="rank-row"><div class="pos" style="background:var(--green-050);color:var(--green-700);"><i data-lucide="user-plus" style="width:15px;height:15px;"></i></div><div class="nm"><b>Varendra University unit approved</b><span>2 hours ago</span></div></div>
+            <div class="rank-row"><div class="pos" style="background:var(--gold-100);color:var(--gold-600);"><i data-lucide="award" style="width:15px;height:15px;"></i></div><div class="nm"><b>Q3 grades published</b><span>Yesterday</span></div></div>
+            <div class="rank-row"><div class="pos" style="background:#eaf1fb;color:var(--info);"><i data-lucide="bell" style="width:15px;height:15px;"></i></div><div class="nm"><b>National notice sent to 142 units</b><span>2 days ago</span></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="toast-host" id="toastHost"></div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../assets/js/auth.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/store.js"></script>
+<script>
+  // --- Auth guard: admins → dashboard, members → their profile, guests → login ---
+  var user = JCDAuth.current();
+  if (!user) { location.replace("login.html"); }
+  else if (!JCDAuth.can("viewDash")) { location.replace("member-profile.html"); }
+  else { initDashboard(user); }
+
+  function toast(msg, err) {
+    var h = document.getElementById("toastHost");
+    var t = document.createElement("div"); t.className = "toast" + (err ? " err" : "");
+    t.innerHTML = '<i data-lucide="' + (err ? "x-circle" : "check-circle-2") + '"></i>' + msg;
+    h.appendChild(t); if (window.lucide) lucide.createIcons();
+    setTimeout(function () { t.remove(); }, 2600);
+  }
+
+  function initDashboard(user) {
+    var universities = window.JCD.universities;
+
+    // User chip / welcome / logout
+    var ini = user.name.split(" ").map(function (w) { return w[0]; }).slice(0, 2).join("");
+    document.getElementById("userChip").innerHTML = '<span class="av">' + ini + '</span><span><b>' + user.name + '</b><span>' + JCDAuth.roleLabel(user.role) + '</span></span>';
+    document.getElementById("welcomeLine").textContent = "Welcome back, " + user.name + " · " + JCDAuth.roleLabel(user.role);
+    document.getElementById("logoutBtn").addEventListener("click", function () { JCDAuth.logout(); location.href = "login.html"; });
+
+    // Grading table (reads persisted grades via store.js)
+    var canGrade = JCDAuth.can("grade");
+    var gbody = document.getElementById("gradeBody");
+    gbody.innerHTML = universities.slice(0, 10).map(function (u) {
+      var activity = Math.min(99, 55 + (u.members % 45));
+      return "<tr><td><b>" + u.name + "</b></td><td>" + u.division + "</td><td>" + u.members + "</td>" +
+        '<td><div class="bar__track" style="width:90px;"><div class="bar__fill" style="width:' + activity + '%;"></div></div></td>' +
+        '<td><span class="grade grade--' + u.grade + '" id="badge-' + u.id + '">' + u.grade + "</span></td>" +
+        '<td><select class="select gsel" data-uni="' + u.id + '" style="min-width:auto;padding:6px 10px;font-size:.82rem;">' +
+        ["A", "B", "C", "D"].map(function (g) { return "<option " + (u.grade === g ? "selected" : "") + ">" + g + "</option>"; }).join("") +
+        "</select></td></tr>";
+    }).join("");
+    document.querySelectorAll(".gsel").forEach(function (sel) {
+      if (!canGrade) { sel.disabled = true; sel.classList.add("locked"); return; }
+      sel.addEventListener("change", function () {
+        var id = sel.dataset.uni, g = sel.value;
+        JCDStore.setGrade(id, g);
+        var badge = document.getElementById("badge-" + id);
+        if (badge) { badge.className = "grade grade--" + g; badge.id = "badge-" + id; badge.textContent = g; }
+        toast("Grade saved: " + id.toUpperCase() + " → " + g + " (live on the public directory)");
+      });
+    });
+
+    // Notice composer
+    var canNotice = JCDAuth.can("notice");
+    if (!canNotice) document.querySelector(".notice-compose").classList.add("locked");
+    document.getElementById("npublish").addEventListener("click", function () {
+      if (!canNotice) { toast("You do not have permission to publish notices", true); return; }
+      var title = document.getElementById("ntitle").value.trim();
+      var bodyv = document.getElementById("nbody").value.trim();
+      if (!title) { toast("Please enter a notice title", true); return; }
+      var target = (document.querySelector("#seg button.active") || {}).textContent || "National";
+      var priority = document.getElementById("npriority").value;
+      var d = new Date();
+      var mon = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][d.getMonth()];
+      var day = ("0" + d.getDate()).slice(-2);
+      var tags = [target]; if (priority !== "Normal") tags.push(priority);
+      JCDStore.addNotice({ day: day, mon: mon, title: title, body: bodyv || "(no details)", tags: tags });
+      document.getElementById("ntitle").value = ""; document.getElementById("nbody").value = "";
+      toast("Notice published to " + target + " — now visible on the homepage");
+    });
+
+    // Reset demo edits
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      JCDStore.resetAll(); toast("Demo edits cleared"); setTimeout(function () { location.reload(); }, 600);
+    });
+
+    // Chart animation
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (!e.isIntersecting) return; io.disconnect(); document.querySelectorAll("#chart .fill").forEach(function (f) { f.style.height = f.dataset.h + "%"; }); }); }, { threshold: 0.3 });
+    io.observe(document.getElementById("chart"));
+
+    // Segmented control
+    document.querySelectorAll("#seg button").forEach(function (b) { b.addEventListener("click", function () { document.querySelectorAll("#seg button").forEach(function (x) { x.classList.remove("active"); }); b.classList.add("active"); }); });
+
+    if (window.lucide) lucide.createIcons();
+  }
+</script>
+</body>
+</html>
