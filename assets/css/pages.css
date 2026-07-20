@@ -297,6 +297,27 @@
 .uni-card__stats div b { font-size: 1.05rem; color: var(--green-800); } .uni-card__stats div span { font-size: 0.72rem; color: var(--ink-400); display: block; }
 
 /* ----------------------------------------------------------------------------
+   PEOPLE / MEMBER DIRECTORY
+   ---------------------------------------------------------------------------- */
+.person-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-4); }
+@media (max-width: 900px) { .person-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .person-grid { grid-template-columns: 1fr; } }
+.person-card { display: flex; gap: var(--s-4); align-items: center; padding: var(--s-4); border: 1px solid var(--line); border-radius: var(--r-card); background: var(--paper); box-shadow: var(--sh-sm); transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2), border-color var(--dur-2); }
+.person-card:hover { transform: translateY(-4px); box-shadow: var(--sh-lg); border-color: rgba(201,162,39,.35); }
+.person-card img { width: 62px; height: 62px; border-radius: 50%; flex-shrink: 0; object-fit: cover; box-shadow: 0 4px 12px -4px rgba(6,34,26,.35); }
+.person-card__b { min-width: 0; flex: 1; }
+.person-card h4 { margin: 0 0 1px; font-size: 1rem; }
+.person-card .role { color: var(--flag-red, #c8102e); font-size: .8rem; font-weight: 700; }
+.person-card .meta { font-size: .78rem; color: var(--ink-400); margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+.person-card .g { margin-left: auto; align-self: flex-start; }
+
+/* Read/unread notice dot */
+.notice.unread { border-left: 3px solid var(--flag-red, #c8102e); }
+.notice.read { opacity: .82; }
+.notice__seen { margin-left: auto; font-size: .7rem; font-weight: 700; color: var(--ink-300); align-self: flex-start; }
+.notice { align-items: flex-start; }
+
+/* ----------------------------------------------------------------------------
    NOTICES / EVENTS / NEWS
    ---------------------------------------------------------------------------- */
 .notice { display: flex; gap: var(--s-4); padding: var(--s-4); border-radius: var(--r-card); border: 1px solid var(--line); background: var(--paper); box-shadow: var(--sh-xs); transition: box-shadow var(--dur-2), transform var(--dur-1); }
