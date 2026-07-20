@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign in — Admin & Member Portal | JCD Private University Wing</title>
+  <meta name="description" content="Role-based sign-in for administrators and members of the Jatiyatabadi Chhatra Dal Private University Wing. The public site remains open to all." />
+  <link rel="icon" href="../assets/img/logo-jcd.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/theme.css" />
+  <link rel="stylesheet" href="../assets/css/pages.css" />
+  <link rel="stylesheet" href="../assets/css/luxury.css" />
+</head>
+<body>
+<div class="auth-wrap">
+  <!-- Aside -->
+  <aside class="auth-aside">
+    <img class="bg" src="../assets/img/flag-dark.jpg" alt="" aria-hidden="true" />
+    <div>
+      <a class="brand" href="../index.html" style="text-decoration:none;">
+        <img class="brand__logo" src="../assets/img/logo-jcd.png" alt="" />
+        <span class="brand__text"><span class="brand__title">জাতীয়তাবাদী ছাত্রদল</span><span class="brand__sub" style="color:var(--gold-hi,#f4e4a6);">Private University Wing</span></span>
+      </a>
+    </div>
+    <div>
+      <span class="badge badge--gold" style="margin-bottom:14px;">Secure Console</span>
+      <h2>Manage the movement.</h2>
+      <p>Sign in to administer committees, grade units, publish notices and maintain member profiles — with role-based access.</p>
+      <div class="pt"><i data-lucide="shield-check"></i> Role-based permissions</div>
+      <div class="pt"><i data-lucide="bell-ring"></i> Publish notices to any tier</div>
+      <div class="pt"><i data-lucide="award"></i> Grade universities & members</div>
+      <div class="pt"><i data-lucide="globe"></i> The public site stays open to everyone</div>
+    </div>
+    <div class="motif-line" style="max-width:200px;"></div>
+  </aside>
+
+  <!-- Form -->
+  <main class="auth-main">
+    <div class="auth-card">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <span class="eyebrow">Sign in</span>
+        <a href="../index.html" style="font-size:.85rem;">← Back to site</a>
+      </div>
+      <h1>Welcome back</h1>
+      <p class="muted" style="font-size:.9rem;">Access the admin & member console.</p>
+
+      <div class="auth-error" id="authError"><i data-lucide="alert-circle" style="width:14px;height:14px;vertical-align:-2px;"></i> Invalid email or password.</div>
+
+      <form id="loginForm">
+        <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@jcdpu.org" autocomplete="username" required /></div>
+        <div class="field"><label for="password">Password</label><input id="password" type="password" placeholder="••••••••" autocomplete="current-password" required /></div>
+        <div class="d-flex justify-content-between align-items-center mb-3" style="font-size:.82rem;">
+          <label style="display:flex;gap:7px;align-items:center;color:var(--ink-500);"><input type="checkbox" checked /> Remember me</label>
+          <a href="#" style="font-size:.82rem;">Forgot password?</a>
+        </div>
+        <button class="btn btn--primary btn--block btn--lg" type="submit"><i data-lucide="log-in"></i> Sign in</button>
+      </form>
+
+      <div style="margin-top:var(--s-5);">
+        <div style="font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;color:var(--ink-400);font-weight:700;margin-bottom:10px;">Demo accounts — click to fill</div>
+        <div class="demo-accounts" id="demoAccounts"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="toast-host" id="toastHost"></div>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script src="../assets/js/auth.js"></script>
+<script>
+  var colors = { super_admin: "#c8102e", national_admin: "#006a4e", university_admin: "#1849a9", general_member: "#b8860b" };
+
+  // Build demo account chips
+  document.getElementById("demoAccounts").innerHTML = JCDAuth.USERS.map(function (u) {
+    var ini = u.name.split(" ").map(function (w) { return w[0]; }).slice(0, 2).join("");
+    return '<button type="button" class="demo-chip" data-email="' + u.email + '" data-pass="' + u.pass + '">' +
+      '<span class="rl" style="background:' + (colors[u.role] || "#555") + '">' + ini + '</span>' +
+      '<span style="flex:1;"><b>' + JCDAuth.roleLabel(u.role) + '</b><span>' + u.email + ' · ' + u.pass + '</span></span>' +
+      '<i data-lucide="chevron-right" style="width:16px;height:16px;color:var(--ink-300);"></i></button>';
+  }).join("");
+
+  document.querySelectorAll(".demo-chip").forEach(function (c) {
+    c.addEventListener("click", function () {
+      document.getElementById("email").value = c.dataset.email;
+      document.getElementById("password").value = c.dataset.pass;
+    });
+  });
+
+  function toast(msg, err) {
+    var host = document.getElementById("toastHost");
+    var t = document.createElement("div"); t.className = "toast" + (err ? " err" : "");
+    t.innerHTML = '<i data-lucide="' + (err ? "x-circle" : "check-circle-2") + '"></i>' + msg;
+    host.appendChild(t); if (window.lucide) lucide.createIcons();
+    setTimeout(function () { t.remove(); }, 2600);
+  }
+
+  document.getElementById("loginForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = document.getElementById("email").value;
+    var pass = document.getElementById("password").value;
+    var user = JCDAuth.login(email, pass);
+    if (user) {
+      document.getElementById("authError").classList.remove("show");
+      toast("Welcome, " + user.name + " — redirecting…");
+      setTimeout(function () { location.href = "dashboard.html"; }, 700);
+    } else {
+      document.getElementById("authError").classList.add("show");
+      toast("Invalid email or password", true);
+    }
+  });
+
+  if (window.lucide) lucide.createIcons();
+</script>
+</body>
+</html>
