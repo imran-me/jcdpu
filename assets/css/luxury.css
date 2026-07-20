@@ -1,0 +1,451 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&display=swap');
+/* ============================================================================
+   luxury.css — "Heritage Couture" enhancement layer
+   ----------------------------------------------------------------------------
+   Loaded AFTER theme.css + pages.css on every page. Elevates the base system
+   to a super-premium, expensive, institutional feel: high-contrast serif
+   display type, 24k gold-foil accents, ornamental Bengali motifs, cinematic
+   dark bands, fine grain texture and refined micro-interactions.
+   Nothing here breaks layout — it only enriches surface, type & depth.
+   ============================================================================ */
+
+:root {
+  --font-display: "Playfair Display", "Hind Siliguri", Georgia, serif;
+  --font-serif-it: "Cormorant Garamond", Georgia, serif;
+
+  /* Refined 24k-foil gold ramp */
+  --gold-hi:  #f4e4a6;
+  --gold:     #c9a227;
+  --gold-dp:  #9a7b12;
+  --gold-foil: linear-gradient(135deg, #f7e9b0 0%, #e2c766 26%, #c9a227 52%, #a07d15 78%, #d9b84a 100%);
+  --gold-line: linear-gradient(90deg, transparent, var(--gold) 20%, var(--gold-hi) 50%, var(--gold) 80%, transparent);
+
+  /* Warmer, richer surfaces */
+  --paper-2: #faf8f2;         /* champagne off-white */
+  --paper-3: #f1ece0;
+  --ink-emerald: #05221a;
+
+  /* Deeper luxe shadows */
+  --sh-lux: 0 40px 90px -30px rgba(6, 34, 26, 0.45), 0 12px 30px -12px rgba(16,21,26,0.14);
+}
+
+/* Fine grain used on dark/cinematic surfaces */
+:root {
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+
+/* ---------------------------------------------------------------------------
+   DISPLAY TYPOGRAPHY — high-contrast serif for that couture, expensive feel
+   --------------------------------------------------------------------------- */
+h1, h2, h3,
+.hero h1, .section-head h2, .leader__body h3, .cta-band h2, .memoriam__body h3,
+.profile-id h1, .pane > h3, .dash__top h1, .panel__head h3 {
+  font-family: var(--font-display);
+  letter-spacing: -0.012em;
+  font-weight: 700;
+}
+.hero h1, .section-head h2, .cta-band h2 { font-weight: 800; }
+.section-head h2 { font-size: clamp(1.9rem, 3vw, 2.6rem); line-height: 1.12; }
+.hero h1 { font-weight: 800; letter-spacing: -0.02em; }
+.pane > h3, .panel__head h3, .dash__top h1 { letter-spacing: -0.005em; }
+
+/* Bangla display stays in Hind Siliguri, just heavier & tighter */
+.brand__title, .hero__bn, .text-bn, .footer__brand strong { font-family: var(--font-bn) !important; }
+.hero__bn { font-weight: 700; letter-spacing: 0.01em; }
+
+/* Eyebrow → refined gold small-caps */
+.eyebrow {
+  color: var(--gold-dp);
+  letter-spacing: 0.28em;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+.eyebrow::before { width: 30px; height: 1.5px; background: var(--gold-foil); }
+
+/* Gold-foil text utility */
+.gold-text {
+  background: var(--gold-foil);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+/* Elegant italic accent */
+.script { font-family: var(--font-serif-it); font-style: italic; font-weight: 500; }
+
+/* ---------------------------------------------------------------------------
+   ORNAMENTAL DIVIDER — thin gold rule with a central diamond (Bengali motif)
+   --------------------------------------------------------------------------- */
+.ornament { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 8px 0 0; }
+.ornament::before, .ornament::after { content: ""; height: 1px; width: min(120px, 22vw); background: var(--gold-line); }
+.ornament i {
+  width: 12px; height: 12px; transform: rotate(45deg); background: var(--gold-foil);
+  box-shadow: 0 0 0 4px rgba(201,162,39,0.14); border-radius: 2px; flex-shrink: 0; display: block;
+}
+.ornament--center { justify-content: center; }
+.section-head.center .ornament { margin-inline: auto; }
+
+/* ---------------------------------------------------------------------------
+   BUTTONS — gold foil with light sheen; refined ghost
+   --------------------------------------------------------------------------- */
+.btn { letter-spacing: 0.01em; }
+.btn--gold {
+  background: var(--gold-foil) !important; color: #241a00 !important;
+  border: 1px solid rgba(154,123,18,0.5) !important;
+  box-shadow: 0 10px 28px -8px rgba(201,162,39,0.55), inset 0 1px 0 rgba(255,255,255,0.5) !important;
+  position: relative; overflow: hidden;
+}
+.btn--gold::after {
+  content: ""; position: absolute; inset: 0; transform: translateX(-120%);
+  background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,0.55) 50%, transparent 70%);
+  transition: transform 0.7s var(--ease);
+}
+.btn--gold:hover::after { transform: translateX(120%); }
+.btn--primary {
+  background: linear-gradient(180deg, var(--green-600), var(--green-800)) !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+  box-shadow: 0 10px 26px -10px rgba(6,34,26,0.6), inset 0 1px 0 rgba(255,255,255,0.12) !important;
+}
+.btn--ghost { border-color: rgba(154,123,18,0.35); }
+.btn--ghost:hover { border-color: var(--gold); background: #fffdf6; }
+
+/* ---------------------------------------------------------------------------
+   NAVBAR — thinner, glassier, gold hairline + gold underline on hover
+   --------------------------------------------------------------------------- */
+.topbar { background: linear-gradient(90deg, var(--ink-emerald), #0b3122 60%, var(--ink-emerald)); }
+.topbar::after { content: ""; display: block; height: 1px; background: var(--gold-line); opacity: 0.6; }
+.nav { border-bottom: 1px solid rgba(201,162,39,0.18); }
+.nav.is-scrolled { box-shadow: 0 10px 40px -18px rgba(6,34,26,0.28); }
+.brand__logo { box-shadow: 0 4px 14px -4px rgba(6,34,26,0.35), 0 0 0 1px rgba(201,162,39,0.25); }
+.brand__title { background: linear-gradient(90deg, var(--green-800), var(--green-600)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.nav__link { position: relative; }
+.nav__link::after {
+  content: ""; position: absolute; left: 14px; right: 14px; bottom: 5px; height: 1.5px;
+  background: var(--gold-foil); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-2) var(--ease);
+}
+.nav__link:hover::after { transform: scaleX(1); }
+
+/* ---------------------------------------------------------------------------
+   HERO — cinematic emerald with gold god-rays, grain, framed portrait
+   --------------------------------------------------------------------------- */
+.hero { background: radial-gradient(120% 120% at 70% -10%, #0c3626 0%, #06231a 55%, #04180f 100%); }
+.hero__scrim {
+  background:
+    radial-gradient(900px 520px at 82% -6%, rgba(201,162,39,0.22), transparent 58%),
+    radial-gradient(700px 500px at 10% 110%, rgba(122,26,43,0.28), transparent 60%),
+    linear-gradient(180deg, rgba(4,24,15,0.55), rgba(4,24,15,0.9) 78%, #04180f);
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: var(--grain); background-size: 180px; opacity: 0.05; mix-blend-mode: overlay;
+}
+.hero__flag {
+  background: rgba(201,162,39,0.10); border: 1px solid rgba(201,162,39,0.38);
+  color: var(--gold-hi); letter-spacing: 0.06em; box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+.hero__flag .dot { background: var(--gold-hi); box-shadow: 0 0 12px 2px rgba(244,228,166,0.6); }
+.hero h1 .accent { background: var(--gold-foil); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero__lead { color: rgba(255,255,255,0.78); font-size: 1.14rem; }
+.hero__bn { color: var(--gold-hi); text-shadow: 0 2px 30px rgba(201,162,39,0.25); }
+
+/* Gilded frame around the hero portrait */
+.hero__card { border: 1px solid rgba(201,162,39,0.55); box-shadow: var(--sh-lux); }
+.hero__card::before {
+  content: ""; position: absolute; inset: 8px; z-index: 3; pointer-events: none;
+  border: 1px solid rgba(244,228,166,0.35); border-radius: 10px;
+}
+.hero__card figcaption { background: linear-gradient(0deg, rgba(4,24,15,0.96), rgba(4,24,15,0.2) 70%, transparent); }
+.hero__card figcaption strong { font-family: var(--font-display); }
+.hero__leaders .stack img { border-color: rgba(201,162,39,0.7); box-shadow: 0 4px 12px -3px rgba(0,0,0,0.5); }
+
+/* Strip → thin gilded band */
+.strip { background: linear-gradient(90deg, #06231a, #0b3122 50%, #06231a); border-top: 1px solid rgba(201,162,39,0.2); border-bottom: 1px solid rgba(201,162,39,0.2); }
+.strip__track span { color: rgba(255,255,255,0.82); }
+.strip__track span svg { color: var(--gold-hi); }
+
+/* ---------------------------------------------------------------------------
+   SURFACES — warm alt backgrounds, gilded card edges, luxe depth
+   --------------------------------------------------------------------------- */
+.bg-soft { background:
+  linear-gradient(180deg, #ffffff, var(--paper-2));
+  position: relative; }
+.bg-soft::before, .bg-soft::after { content: ""; position: absolute; left: 0; right: 0; height: 1px; background: var(--gold-line); opacity: 0.5; }
+.bg-soft::before { top: 0; } .bg-soft::after { bottom: 0; }
+.bg-mesh { background:
+  radial-gradient(760px 380px at 88% 0%, rgba(201,162,39,0.10), transparent 60%),
+  radial-gradient(680px 360px at 0% 100%, rgba(122,26,43,0.07), transparent 58%),
+  linear-gradient(180deg, #ffffff, var(--paper-2)); }
+
+.stat, .feature, .card, .tl-card, .notice, .event-card, .uni-card, .side-card, .pane, .panel, .kpi {
+  border-color: rgba(201,162,39,0.14);
+}
+.stat { box-shadow: 0 30px 60px -34px rgba(6,34,26,0.4), 0 2px 6px rgba(16,21,26,0.04); }
+.stat::after { background: var(--gold-foil); height: 3px; }
+.stat__icon { background: linear-gradient(160deg, #ffffff, var(--paper-2)); box-shadow: inset 0 0 0 1px rgba(201,162,39,0.25); color: var(--green-700); }
+.stat__num { font-family: var(--font-display); font-weight: 800; }
+.stat__num .suffix { background: var(--gold-foil); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+.feature { position: relative; }
+.feature::before {
+  content: ""; position: absolute; top: 0; left: 24px; right: 24px; height: 2px;
+  background: var(--gold-foil); border-radius: 2px; transform: scaleX(0); transform-origin: center; transition: transform var(--dur-2) var(--ease);
+}
+.feature:hover::before { transform: scaleX(1); }
+.feature:hover { border-color: rgba(201,162,39,0.35); }
+.feature h3 { font-size: 1.12rem; }
+
+/* Section titles get an italic serif lead-in feel via lead */
+.section-head .lead { font-family: var(--font-serif-it); font-style: italic; font-size: 1.3rem; color: var(--ink-500); }
+
+/* ---------------------------------------------------------------------------
+   LEADERSHIP / LEGACY — museum plaque treatment
+   --------------------------------------------------------------------------- */
+.leader { border: 1px solid rgba(201,162,39,0.22); box-shadow: var(--sh-lux); }
+.leader__img::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(4,24,15,0.35)); }
+.leader__body { position: relative; }
+.leader__body::before { content: ""; position: absolute; top: 0; left: var(--s-5); width: 34px; height: 2px; background: var(--gold-foil); }
+.leader__body h3 { font-size: 1.3rem; margin-top: 6px; }
+.leader__role { color: var(--maroon-700); letter-spacing: 0.04em; }
+.leader__ribbon.badge { background: var(--gold-foil); color: #241a00; box-shadow: 0 6px 16px -6px rgba(201,162,39,0.6); border: none; }
+
+/* In-Memoriam → deep obsidian with gold rule */
+.memoriam { background:
+  linear-gradient(120deg, #070b0d, #10161a 60%, #0a1114);
+  border: 1px solid rgba(201,162,39,0.25); position: relative; }
+.memoriam::before { content: ""; position: absolute; inset: 0; background-image: var(--grain); background-size: 160px; opacity: 0.05; pointer-events: none; }
+.memoriam__body .ribbon { color: var(--gold-hi); letter-spacing: 0.2em; }
+.memoriam__body h3 { font-size: 2rem; }
+.memoriam__body h3::after { content: ""; display: block; width: 60px; height: 2px; background: var(--gold-foil); margin-top: 14px; }
+
+/* ---------------------------------------------------------------------------
+   TIMELINE — gilded spine & nodes
+   --------------------------------------------------------------------------- */
+.timeline::before { background: linear-gradient(var(--gold), var(--gold-dp) 50%, var(--maroon-600)); opacity: 0.85; width: 2px; }
+.tl-dot { background: var(--gold-foil); box-shadow: 0 0 0 2px var(--gold), 0 0 14px rgba(201,162,39,0.5); }
+.tl-year { font-family: var(--font-display); color: var(--green-800); }
+.tl-card { border: 1px solid rgba(201,162,39,0.16); }
+.tl-card:hover { border-color: rgba(201,162,39,0.4); }
+
+/* ---------------------------------------------------------------------------
+   CTA BAND — gilded frame + grain
+   --------------------------------------------------------------------------- */
+.cta-band { border: 1px solid rgba(201,162,39,0.4); box-shadow: var(--sh-lux); }
+.cta-band::before { background: linear-gradient(120deg, rgba(5,34,26,0.94), rgba(122,26,43,0.6)); }
+.cta-band::after { content: ""; position: absolute; inset: 0; z-index: -1; background-image: var(--grain); background-size: 170px; opacity: 0.06; }
+.cta-band__inner { position: relative; }
+.cta-band__inner::before {
+  content: ""; position: absolute; inset: 18px; border: 1px solid rgba(244,228,166,0.28); border-radius: 18px; pointer-events: none;
+}
+.cta-band h2 { font-size: clamp(2rem, 3.4vw, 2.8rem); }
+
+/* ---------------------------------------------------------------------------
+   UNIVERSITY / DIRECTORY cards — gilded
+   --------------------------------------------------------------------------- */
+.uni-card { box-shadow: 0 24px 50px -34px rgba(6,34,26,0.4); }
+.uni-card:hover { box-shadow: var(--sh-lux); border-color: rgba(201,162,39,0.4); }
+.uni-card__logo { box-shadow: 0 6px 16px -6px rgba(6,34,26,0.4), 0 0 0 1px rgba(201,162,39,0.3); }
+.uni-card__cover::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08)); }
+.grade { box-shadow: 0 6px 16px -6px rgba(0,0,0,0.4); }
+
+/* ---------------------------------------------------------------------------
+   PROFILE / DASHBOARD refinements
+   --------------------------------------------------------------------------- */
+.profile-avatar { box-shadow: var(--sh-lg), 0 0 0 1px rgba(201,162,39,0.4); }
+/* Name/meta sit below the cover on white — use dark, high-contrast ink */
+.profile-head { margin-top: -56px; }
+.profile-id h1 { font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--ink-900); text-shadow: none; }
+.profile-id .sub { color: var(--ink-500); text-shadow: none; font-weight: 600; }
+.idcard { border: 1px solid rgba(201,162,39,0.4); box-shadow: var(--sh-lux); }
+.idcard__top { border-bottom-color: rgba(201,162,39,0.3); }
+.score-ring .ring { box-shadow: 0 0 0 1px rgba(201,162,39,0.2); }
+.dash__side { background: linear-gradient(180deg, #06231a, #04180f); border-right: 1px solid rgba(201,162,39,0.18); }
+.dash__brand b { font-family: var(--font-display); }
+.kpi b { font-family: var(--font-display); }
+
+/* ---------------------------------------------------------------------------
+   FOOTER — deep emerald, gilded rule, serif wordmark
+   --------------------------------------------------------------------------- */
+.footer { background: radial-gradient(120% 100% at 50% 0%, #0b3122, #04180f 70%); border-top: 1px solid rgba(201,162,39,0.3); }
+.footer h5 { color: var(--gold-hi); letter-spacing: 0.16em; }
+.footer__brand strong { color: #fff; }
+.footer__social a:hover { background: var(--gold-foil); color: #241a00; }
+.motif-line { background: var(--gold-line); height: 1.5px; }
+.footer__bar { color: rgba(255,255,255,0.6); }
+
+/* Selection + focus tuned to gold */
+::selection { background: rgba(201,162,39,0.28); color: #04180f; }
+
+/* Subtle entrance for portraits */
+@keyframes lux-rise { from { opacity: 0; transform: translateY(18px) scale(0.99); } to { opacity: 1; transform: none; } }
+
+/* ============================================================================
+   FLAG PALETTE — Bangladesh flag + BNP logo (bottle green + vermillion red)
+   with gold as the luxury accent. Red & green now lead the identity.
+   ============================================================================ */
+:root {
+  --flag-green: #006a4e;      /* Bangladesh flag green */
+  --flag-red:   #c8102e;      /* rich patriotic red */
+  --flag-red-hi:#e63946;
+  --red-foil:   linear-gradient(135deg, #e63946 0%, #c8102e 55%, #8f0b20 100%);
+  --green-foil: linear-gradient(135deg, #12b47e 0%, #006a4e 55%, #04452f 100%);
+  /* Tricolour luxury rule: green → gold → red */
+  --tricolor: linear-gradient(90deg, var(--flag-green) 0%, var(--gold) 48%, var(--gold-hi) 52%, var(--flag-red) 100%);
+}
+
+/* Tricolour rules everywhere the gold line was used for identity */
+.motif-line { background: var(--tricolor); height: 3px; border-radius: 3px; }
+.strip { border-top-color: rgba(230,57,70,.35); border-bottom-color: rgba(18,180,126,.35); }
+
+/* Ornament: green line — red diamond — gold — red diamond — green line */
+.ornament::before, .ornament::after { background: linear-gradient(90deg, transparent, var(--flag-green) 40%, var(--gold) 100%); }
+.ornament::after { background: linear-gradient(90deg, var(--gold), var(--flag-red) 60%, transparent); }
+.ornament i { background: var(--red-foil); box-shadow: 0 0 0 4px rgba(200,16,46,.14); }
+
+/* Eyebrow accent → patriotic red */
+.eyebrow { color: var(--flag-red); }
+.eyebrow::before { background: var(--red-foil); }
+
+/* Badges → flag colours */
+.badge--maroon { background: #fdeaec; color: var(--flag-red); }
+.badge--green { background: #e2f4ec; color: var(--flag-green); }
+.leader__role, .dossier__honorific { color: var(--flag-red); }
+
+/* Buttons: add a patriotic red variant + retheme maroon */
+.btn--maroon, .btn--red {
+  background: var(--red-foil) !important; color: #fff !important;
+  border: 1px solid rgba(143,11,32,.5) !important;
+  box-shadow: 0 10px 26px -10px rgba(200,16,46,.6), inset 0 1px 0 rgba(255,255,255,.18) !important;
+}
+
+/* Uni card covers echo flag: green / red / gold */
+.uni-card__cover { background: var(--green-foil); }
+.uni-card__cover.alt1 { background: var(--red-foil); }
+.uni-card__cover.alt2 { background: linear-gradient(120deg, #0b3122, var(--flag-green)); }
+
+/* Feature icon "maroon" slot → flag red */
+.feature__icon.m { background: var(--red-foil); }
+.org__node[data-tier="1"] .org__level { background: var(--red-foil); }
+.org__node[data-tier="2"] .org__level { background: var(--green-foil); }
+
+/* Timeline spine: green → gold → red */
+.timeline::before { background: linear-gradient(var(--flag-green), var(--gold) 50%, var(--flag-red)); opacity: .9; }
+.tl-dot { background: var(--red-foil); box-shadow: 0 0 0 2px var(--flag-red), 0 0 14px rgba(200,16,46,.45); }
+.badge--maroon.tag { background: #fdeaec; color: var(--flag-red); }
+
+/* Hero: warm the red god-ray, keep green base (flag duo) */
+.hero__scrim {
+  background:
+    radial-gradient(900px 520px at 82% -6%, rgba(201,162,39,.20), transparent 58%),
+    radial-gradient(760px 520px at 8% 108%, rgba(200,16,46,.34), transparent 60%),
+    linear-gradient(180deg, rgba(4,24,15,.5), rgba(4,24,15,.9) 78%, #04180f);
+}
+
+/* Section title first-letter / accent kept gold; add red underline option */
+.section-head h2 .u-red { color: var(--flag-red); }
+
+/* ============================================================================
+   ANIMATIONS — tasteful, premium motion
+   ============================================================================ */
+
+/* Animated gold shimmer for wordmark accents */
+@keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
+.shimmer {
+  background: linear-gradient(90deg, var(--gold-dp), var(--gold-hi) 45%, #fff 50%, var(--gold-hi) 55%, var(--gold-dp));
+  background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+/* Pulsing hero flag dot */
+@keyframes pulse-dot { 0%,100% { box-shadow: 0 0 0 0 rgba(244,228,166,.55); } 50% { box-shadow: 0 0 0 8px rgba(244,228,166,0); } }
+.hero__flag .dot { animation: pulse-dot 2.4s var(--ease) infinite; }
+
+/* Slow drifting light behind hero (flag colours breathing) */
+@keyframes aurora {
+  0%   { transform: translate3d(0,0,0) scale(1); opacity: .9; }
+  50%  { transform: translate3d(3%, -2%, 0) scale(1.08); opacity: 1; }
+  100% { transform: translate3d(0,0,0) scale(1); opacity: .9; }
+}
+.hero__scrim { animation: aurora 16s ease-in-out infinite; }
+
+/* Reveal-on-scroll (JS toggles .in) — richer than default */
+[data-lux] { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
+[data-lux].in { opacity: 1; transform: none; }
+[data-lux="left"]  { transform: translateX(-32px); }
+[data-lux="right"] { transform: translateX(32px); }
+[data-lux="zoom"]  { transform: scale(.94); }
+[data-lux].in { transform: none; }
+[data-lux-delay="1"] { transition-delay: .08s; }
+[data-lux-delay="2"] { transition-delay: .16s; }
+[data-lux-delay="3"] { transition-delay: .24s; }
+[data-lux-delay="4"] { transition-delay: .32s; }
+
+/* Card hover: gilded lift with red-green edge glow */
+.feature, .uni-card, .leader, .event-card, .stat, .cmember, .tl-card {
+  transition: transform var(--dur-2) var(--ease), box-shadow var(--dur-2) var(--ease), border-color var(--dur-2) var(--ease);
+}
+.feature:hover, .cmember:hover { box-shadow: 0 30px 60px -30px rgba(0,106,78,.35), 0 8px 20px -10px rgba(200,16,46,.2); }
+
+/* Ken-Burns drift for hero background image */
+@keyframes kenburns { 0% { transform: scale(1.06) translate(0,0); } 100% { transform: scale(1.16) translate(-1.5%, -1.5%); } }
+.hero__bg { animation: kenburns 22s ease-in-out infinite alternate; }
+
+/* Gilded gradient border sweep on primary CTA cards */
+@keyframes borderflow { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+
+/* Link/underline handled in nav; add smooth image zoom on all figures */
+.gallery figure img, .dossier__gallery img, .leader__img img, .event-card__img img { transition: transform .7s var(--ease); }
+
+/* Smooth number roll accent */
+.stat__num { transition: color var(--dur-2) var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn--gold::after, .shimmer { animation: none !important; }
+  .hero__scrim, .hero__bg, .hero__flag .dot { animation: none !important; }
+  [data-lux] { opacity: 1 !important; transform: none !important; }
+}
+
+/* ============================================================================
+   NAVBAR — STABILITY FIX + BD-FLAG ACCENT  (v6)
+   Fixes: brand wordmark wrapping in the 1040–1180px tween zone, the language
+   toggle reflowing the whole bar, and cramped items. Flag red+green forward.
+   ============================================================================ */
+
+/* 1) Brand & links never wrap → no multi-line jumps */
+.brand__title, .brand__sub, .nav__link { white-space: nowrap; }
+.brand__text { min-width: 0; }
+.nav__inner { flex-wrap: nowrap; gap: 20px; }
+.nav__menu { flex-wrap: nowrap; }
+
+/* 2) Chrome stays Latin (Inter) regardless of the বাংলা/EN toggle → no reflow.
+      Only the Bengali wordmark keeps its Bengali face. */
+body.bn .topbar, body.bn .topbar *,
+body.bn .nav__menu, body.bn .nav__link,
+body.bn .nav__actions, body.bn .nav__actions *,
+body.bn .brand__sub { font-family: var(--font-ui) !important; }
+.brand__title { font-family: var(--font-bn) !important; }
+
+/* 3) Collapse to the hamburger BEFORE the cramped zone (was 1040 → now 1200) */
+@media (max-width: 1200px) {
+  .nav__menu,
+  .nav__actions .btn--ghost { display: none !important; }
+  .nav__toggle { display: inline-flex !important; }
+}
+/* Very small screens: drop the primary button too (it lives in the drawer) */
+@media (max-width: 560px) {
+  .nav__actions .btn--primary { display: none !important; }
+  .brand__title { font-size: 0.92rem; }
+  .brand__sub { font-size: 0.62rem; }
+}
+
+/* 4) BD-flag identity on the bar */
+.topbar { background: linear-gradient(90deg, #04402e, var(--flag-green) 48%, #04402e); }
+.topbar::after { background: linear-gradient(90deg, var(--flag-green), var(--gold) 50%, var(--flag-red)); opacity: .9; }
+.nav { position: sticky; border-bottom: 1px solid rgba(0,106,78,.16); }
+.nav::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+  background: linear-gradient(90deg, var(--flag-green) 0 46%, var(--gold) 48% 52%, var(--flag-red) 54% 100%);
+  opacity: .85;
+}
+.nav__link { color: var(--ink-700); }
+.nav__link:hover { color: var(--flag-green); background: rgba(0,106,78,.06); }
+.nav__link::after { background: linear-gradient(90deg, var(--flag-green), var(--flag-red)); }
+.nav__link.is-active { color: var(--flag-green); background: rgba(0,106,78,.07); font-weight: 600; }
+.nav__link.is-active::after { transform: scaleX(1); }
+.brand__title { background: linear-gradient(90deg, var(--flag-green), var(--flag-red)); -webkit-background-clip: text; background-clip: text; color: transparent; }
