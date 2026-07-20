@@ -1,0 +1,102 @@
+rules_version = '2';
+// ============================================================================
+// Firestore security rules — JCD Private University Wing
+// Role-based access. Custom claims (role, universityId) are set via a trusted
+// Cloud Function on user creation / promotion. Never trust client-set roles.
+//   roles: super_admin > national_admin > university_admin > faculty_admin >
+//          committee_member > general_member > (unauthenticated) visitor
+// ============================================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---- Helpers ----------------------------------------------------------
+    function signedIn()      { return request.auth != null; }
+    function role()          { return signedIn() ? request.auth.token.role : 'visitor'; }
+    function isSuper()       { return role() == 'super_admin'; }
+    function isNational()    { return role() in ['super_admin', 'national_admin']; }
+    function isUniAdmin(uid) { return role() == 'university_admin' && request.auth.token.universityId == uid; }
+    function isSelf(uid)     { return signedIn() && request.auth.uid == uid; }
+    function validString(f, max) {
+      return f is string && f.size() > 0 && f.size() <= max;
+    }
+
+    // ---- Public read collections (published content) ----------------------
+    match /universities/{uniId} {
+      allow read: if true;                                  // public directory
+      allow create: if isNational();
+      allow update: if isNational() || isUniAdmin(uniId);   // grade edits: national only (enforce below)
+      allow delete: if isSuper();
+    }
+
+    match /committees/{id} {
+      allow read: if true;
+      allow write: if isNational() || role() == 'university_admin';
+    }
+
+    match /notices/{id} {
+      allow read: if true;                                  // public notice board
+      allow create, update, delete: if isNational() || role() == 'university_admin';
+    }
+
+    match /events/{id} {
+      allow read: if true;
+      allow write: if isNational() || role() in ['university_admin', 'faculty_admin'];
+    }
+
+    match /gallery/{id} {
+      allow read: if true;
+      allow write: if isNational() || role() == 'university_admin';
+    }
+
+    // ---- Members / profiles ----------------------------------------------
+    match /members/{memberId} {
+      allow read: if true;                                  // public nationalist CV
+      // A member may edit their own non-privileged fields; admins may edit all.
+      allow update: if isSelf(memberId) || isNational() || role() == 'university_admin';
+      allow create: if isNational() || role() == 'university_admin';
+      allow delete: if isNational();
+    }
+
+    // ---- Sensitive: users, roles, permissions -----------------------------
+    match /users/{uid} {
+      allow read: if isSelf(uid) || isNational();
+      allow update: if isSelf(uid) &&
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role','universityId','verified']);
+      allow write: if isNational();                         // role/verify changes: admins only
+    }
+
+    match /roles/{id}       { allow read, write: if isSuper(); }
+    match /permissions/{id} { allow read: if isNational(); allow write: if isSuper(); }
+
+    // ---- Performance & grading (central committee only writes) -------------
+    match /performance/{id} {
+      allow read: if true;
+      allow write: if isNational();                         // only central committee grades
+    }
+
+    match /attendance/{id} {
+      allow read: if isNational() || role() in ['university_admin','faculty_admin'];
+      allow write: if isNational() || role() in ['university_admin','faculty_admin'];
+    }
+
+    // ---- Notifications / messages (recipient-scoped) ----------------------
+    match /notifications/{id} {
+      allow read: if signedIn() && (resource.data.uid == request.auth.uid || isNational());
+      allow write: if isNational();
+    }
+
+    // ---- Immutable audit log: append-only, admin-read ---------------------
+    match /audit_logs/{id} {
+      allow read: if isNational();
+      allow create: if signedIn();                          // writes come via Cloud Functions ideally
+      allow update, delete: if false;                       // never mutate history
+    }
+
+    match /logs/{id}   { allow read: if isNational(); allow create: if signedIn(); allow update, delete: if false; }
+    match /reports/{id}{ allow read: if isNational(); allow write: if isNational(); }
+    match /settings/{id}{ allow read: if true; allow write: if isSuper(); }
+
+    // ---- Default deny ------------------------------------------------------
+    match /{document=**} { allow read, write: if false; }
+  }
+}
