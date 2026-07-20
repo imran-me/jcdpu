@@ -188,6 +188,26 @@ d:\JCDPU\
   **User drops files into `assets/img/central/`**: `huraira.jpg`, `bindu.jpg`, `rakib.jpg`, `nasir.jpg`,
   `wasim.jpg` → they replace monograms automatically. Tarique uses existing `pm-tarique.jpg`.
 
+## 12. NAV CONSISTENCY + AUTH + DEEP FUNCTIONALITY (v8) — pushed to GitHub
+- **Nav bug fixed properly**: every page had a DIFFERENT menu → items appeared to move. Now ALL pages
+  share one identical navbar+topbar (About·Organisation·Leadership·History·Universities·Notices +
+  Sign in + Member Portal) driven by `assets/js/nav.js`; current page highlighted green. Dropped the
+  index mega-menu for parity. Verified by stacking 4 navbars.
+- **Role-based auth** (`assets/js/auth.js`): demo accounts (admin@jcdpu.org/admin123, national, nsu, member),
+  permission matrix. Public site stays fully open; only dashboard gated. `pages/login.html` split UI.
+- **Content store** (`assets/js/store.js`): admin edits (grades, notices, member/committee status, added
+  items, profile edits) persist to localStorage and surface on the PUBLIC site. Audit log of all actions.
+- **Admin console** (`pages/dashboard.html`): multi-panel — Overview / Universities (grade+status+add) /
+  Members (approve·suspend·invite) / Committees (create·approve·archive·renew) / Notices (publish+list) /
+  Approvals queue / Reports / Audit log. Hash-routed panels. Permission-gated controls.
+- **Public pages**: `pages/members.html` (member directory, search/filter) and `pages/notices.html`
+  (notice board with NEW/SEEN read tracking, filters). Linked from landing + footer.
+- **Member profile**: signed-in owner/admin gets inline **Edit profile** (about, position, skills) → persists.
+- **Data**: added `members` (12) and `committees` (8) to data.js.
+- GitHub: 19 commits, all authored **Md Imran Hossain <mohsind2kp@gmail.com>**, NO Claude co-author,
+  pushed to https://github.com/imran-me/jcdpu.git (main).
+- Demo login to explore admin: **admin@jcdpu.org / admin123**.
+
 ## 6. DECISIONS / NOTES
 - Static, front-end-first build; Firebase scaffolded (not wired live) so it opens by double-click.
 - Bootstrap 5.3 + Lucide via CDN; fonts via Google Fonts. No inline CSS; ES modules where practical.
